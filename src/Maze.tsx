@@ -4,38 +4,65 @@ import { generate_maze, State } from './dataStructures/maze_generator';
 
 
 export function Maze() {
-    const x = 5;
-    const y = 5;
+    const x = 10;
+    const y = 10;
     const maze = generate_maze(x, y);
 
     const set_id = (state: State): string => {
-        return state; 
+        return (state + " "); 
     }
 
-   // const div_row = new Array(y);
-   // for (let i = 0; i < y; i++) {
-   //     const div_item = new Array(x);
-   //     //div_maze.innerHTML += "<div className='row'>";
-   //     for (let j = 0; j < x; j++) {
-   //         const index = y * i + j;
-   //         const node_state = maze.node_status[index];
-   //         div_item[j] = createElement('div', { className:"item", id:set_id(node_state), key:j});
-   //     }
-   //     
-   //     div_row[i] = createElement('div', {className:"row", key:i }, div_item);
-   // }
-   // const maze_element = createElement('div', {className: "maze"}, div_row); 
-   // 
-   // return maze_element;
+    const get_walls = (x_idx: number, y_idx: number): string => {
+        const index = y_idx * y + x_idx;
+        const node_walls = maze.walls[index];
+        var wall_class_names = "";
+
+        if (x_idx === 0) {
+            wall_class_names += "left-wall ";
+        }
+        if (x_idx === (x - 1)) {
+            wall_class_names += "right-wall ";
+        }
+        if (y_idx === 0) {
+            wall_class_names += "top-wall ";
+        }
+        if (y_idx === (y - 1)) {
+            wall_class_names += "bottom-wall ";
+        }
+
+        node_walls.forEach((neighbur) => {
+            if(neighbur === index - x) {
+                wall_class_names += "top-wall ";
+            } else {} 
+            if(neighbur === index + x) {
+                wall_class_names += "bottom-wall ";
+            } else {}
+            if(neighbur === index - 1) {
+                wall_class_names += "left-wall ";
+            } else {}
+            if(neighbur === index + 1) {
+                wall_class_names += "right-wall ";
+            } else{}
+        });
+        console.log("walls for index: ",index, ": ", node_walls);
+        return wall_class_names;
+    }
+    
+
+    const rows = new Array<number>(y).fill(0);
+
     return (
         <div className='maze'>
-            <div className="item">
-                {maze.node_status.map((val, index) => (
-                    <div className="item" key={index.toString()} id={val}> 
-                        {val}
-                    </div>
-                ))}
-            </div>
+            {rows.map((_, y_idx) => (
+                <div className='row' >
+                    {maze.node_status
+                        .slice(y * y_idx, y * y_idx + x)
+                        .map((status, x_idx) => (
+                        <div className={'items ' + set_id(status) + get_walls(x_idx, y_idx)}>
+                        </div>
+                    ))}
+                </div>
+            ))}
         </div>
     );
 }

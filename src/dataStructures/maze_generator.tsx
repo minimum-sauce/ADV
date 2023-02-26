@@ -33,14 +33,6 @@ function init_maze(width: number, height: number): Maze {
     };
 }
 
-//function maze_clone(maze: Maze): Maze {
-//    const walls = [...maze.walls];
-//    const grid_graph = graph_clone(maze.grid_graph);
-//    const node_status = [...maze.node_status];
-//    return { walls, grid_graph, node_status };
-//
-//}
-
 function maze_remove_wall(maze: Maze, node: number, neighbur: number) {
     maze.walls[node] = maze.walls[node]
                             .filter((item) => item != neighbur);
@@ -56,6 +48,7 @@ export function generate_maze(width: number, height: number): Maze {
     function visit_node(node: number): void {
         maze.node_status[node] = State.visited;
         const permuted_neighburs = random_permutation(maze.grid_graph.node_neighburs[node]);
+        console.log("current node: ", node, "\n");
         permuted_neighburs.forEach((neighbur) => {
             if (maze.node_status[neighbur] === State.unvisited) {
                 maze_remove_wall(maze, node, neighbur);

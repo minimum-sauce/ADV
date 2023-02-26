@@ -34,7 +34,8 @@ Created initial implementation for incremental sort using hooks and state with r
 # [2023-02-24]
 
 ## Implemnetations
-* With the help of PKD libraries, implemented graphs. 
-* 
+* With the help of PKD libraries, implemented graphs as well as the Stack type.
+* implemented graph_create_grid() function for use in creating randomized mazes
+* Implementation of random maze generator. Used Wikipedia as a resource for getting the algorithm. The implementation to code I made myself
 ## Problems
 

@@ -1,4 +1,4 @@
-import { ListGraph, graph_create_grid } from './ListGraph';
+import { ListGraph, graph_create_grid, list_graph_deep_copy } from './ListGraph';
 import {Stack, stack_pop_top, stack_add_item, stack_view_top, stack_create_empty } from './stack';
 
 
@@ -40,15 +40,33 @@ function maze_remove_wall(maze: Maze, node: number, neighbur: number) {
                             .filter((item) => item != node);
 }
 
+function maze_clone(maze: Maze) {
+    const grid_graph = list_graph_deep_copy(maze.grid_graph);
+    const node_status = [...maze.node_status];
+    const walls = new Array<number[]>(maze.walls.length);
+    maze.walls.forEach((neighbur, index) => {
+        walls[index] = [...neighbur]; 
+    });
 
-export function generate_maze(width: number, height: number): Maze {
+    return {
+        grid_graph, 
+        node_status, 
+        walls
+    };
+
+}
+
+export function generate_maze(width: number, height: number): Array<Maze> {
     const maze = init_maze(width, height); 
-   // var Frames: Array<Maze> = new Array<Maze>(0);
+    var frames: Array<Maze> = new Array<Maze>(0);
 
     function visit_node(node: number): void {
         maze.node_status[node] = State.visited;
         const permuted_neighburs = random_permutation(maze.grid_graph.node_neighburs[node]);
+        frames = frames.concat(maze);
+
         console.log("current node: ", node, "\n");
+
         permuted_neighburs.forEach((neighbur) => {
             if (maze.node_status[neighbur] === State.unvisited) {
                 maze_remove_wall(maze, node, neighbur);
@@ -59,7 +77,7 @@ export function generate_maze(width: number, height: number): Maze {
     }
     
     visit_node(0);
-    return maze;
+    return frames;
 }
 
 

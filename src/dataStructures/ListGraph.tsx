@@ -16,6 +16,16 @@ export function graph_create_new(size: number) {
     };
 }
 
+export function list_graph_deep_copy(graph: ListGraph) {
+    const neighburs_copy = new Array<number[]>(graph.node_neighburs.length);
+    graph.node_neighburs.forEach((neighbur, index) => {
+        neighburs_copy[index] = [...neighbur]; 
+    });
+    return {
+        node_neighburs: neighburs_copy,
+        size: graph.size,
+    }
+}
 
 export function graph_create_from_edge_list(size: number, 
                                             edge_list: EdgeList): ListGraph {

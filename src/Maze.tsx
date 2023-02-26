@@ -1,13 +1,9 @@
 import { stringify } from 'querystring';
 import { createElement } from 'react';
-import { generate_maze, State } from './dataStructures/maze_generator';
+import { generate_maze, State, Maze} from './dataStructures/maze_generator';
 
 
-export function Maze() {
-    const x = 10;
-    const y = 10;
-    const maze = generate_maze(x, y);
-
+export function draw_maze(maze: Maze, x: number, y: number) {
     const set_id = (state: State): string => {
         return (state + " "); 
     }
@@ -50,7 +46,6 @@ export function Maze() {
     
 
     const rows = new Array<number>(y).fill(0);
-
     return (
         <div className='maze'>
             {rows.map((_, y_idx) => (
@@ -65,4 +60,13 @@ export function Maze() {
             ))}
         </div>
     );
+}
+
+
+export default function Maze() {
+    const x = 10;
+    const y = 10;
+    const mazes = generate_maze(x, y);
+
+    
 }

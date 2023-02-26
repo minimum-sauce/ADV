@@ -36,6 +36,15 @@ Created initial implementation for incremental sort using hooks and state with r
 ## Implemnetations
 * With the help of PKD libraries, implemented graphs as well as the Stack type.
 * implemented graph_create_grid() function for use in creating randomized mazes
-* Implementation of random maze generator. Used Wikipedia as a resource for getting the algorithm. The implementation to code I made myself
+* Implementation of the random maze generator algorithm. Used Wikipedia as a resource for getting the algorithm. The implementation to code I made myself.
+  Used the random-dfs algorithm.
 ## Problems
+* lot of problems with displaying the maze after it was made. Started with trying to create divs using for-loops but couldn't get it working.
+  After that I tried to implement it using the reactElements but that didn't work out as planed either. I wasn't able to get the display
+
+# [2023-02-26]
+* Continued implementing displaying of the random maze algorithm. Started getting it working when trying the approach we earlier used implementing the array, sorting algorithms.
+* running through a map of each element and creating a customized div-layout for each element.
+* making the css work for displaying the right stuff took some time since I had multiple classes changing some of the same parameters,
+  which had to be changed in the right order. I made it work by making everything classes and adding them in the appropreate order using functions.
 

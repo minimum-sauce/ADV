@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
-import { Maze } from './Maze';
+import { MazeMain } from './Maze';
 
 function App() {
   return (
     <div className="App">
-        <Maze />
+        <MazeMain />
     </div>
   );
 }

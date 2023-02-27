@@ -1,5 +1,5 @@
-import { ListGraph, graph_create_grid, list_graph_deep_copy } from './ListGraph';
-import {Stack, stack_pop_top, stack_add_item, stack_view_top, stack_create_empty } from './stack';
+import { ListGraph, graph_create_grid } from './ListGraph';
+//import {Stack, stack_pop_top, stack_add_item, stack_view_top, stack_create_empty } from './stack';
 
 
 
@@ -13,6 +13,17 @@ export interface Maze {
     walls: Array<Array<number>>;
     grid_graph: ListGraph; 
     node_status: Array<State>;
+}
+
+function list_graph_deep_copy(graph: ListGraph) {
+    const neighburs_copy = new Array<number[]>(graph.node_neighburs.length);
+    graph.node_neighburs.forEach((neighbur, index) => {
+        neighburs_copy[index] = [...neighbur]; 
+    });
+    return {
+        node_neighburs: neighburs_copy,
+        size: graph.size,
+    }
 }
 
 function random_permutation<T>(array: Array<T>): Array<T> {
@@ -40,6 +51,7 @@ function maze_remove_wall(maze: Maze, node: number, neighbur: number) {
                             .filter((item) => item != node);
 }
 
+
 function maze_clone(maze: Maze) {
     const grid_graph = list_graph_deep_copy(maze.grid_graph);
     const node_status = [...maze.node_status];
@@ -47,7 +59,6 @@ function maze_clone(maze: Maze) {
     maze.walls.forEach((neighbur, index) => {
         walls[index] = [...neighbur]; 
     });
-
     return {
         grid_graph, 
         node_status, 
@@ -63,10 +74,7 @@ export function generate_maze(width: number, height: number): Array<Maze> {
     function visit_node(node: number): void {
         maze.node_status[node] = State.visited;
         const permuted_neighburs = random_permutation(maze.grid_graph.node_neighburs[node]);
-        frames = frames.concat(maze);
-
-        console.log("current node: ", node, "\n");
-
+        frames = frames.concat(maze_clone(maze));
         permuted_neighburs.forEach((neighbur) => {
             if (maze.node_status[neighbur] === State.unvisited) {
                 maze_remove_wall(maze, node, neighbur);
@@ -74,6 +82,7 @@ export function generate_maze(width: number, height: number): Array<Maze> {
             } else {}
         });
         maze.node_status[node] = State.fully_explored;
+        frames = frames.concat(maze_clone(maze));
     }
     
     visit_node(0);

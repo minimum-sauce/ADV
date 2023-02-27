@@ -1,0 +1,70 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.maze {
+    border: 5px;
+    border-color: black;
+    margin-top: 30px;
+    margin-left: 800px;
+    margin-bottom: 50px;
+    display: table;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    display: table-row;
+    
+}
+
+.items {
+  border: 3px solid #999;
+  float: left;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 34px;
+  height: 40px;
+  margin-right: -1px;
+  margin-top: -1px;
+  padding: 0;
+  text-align: center;
+  width: 34px;
+}
+
+.unvisited {
+    background-color: black;
+    border-color: black;
+}
+.visited {
+    background-color: white;
+    border-color: white;
+}
+.fully_explored {
+    background-color: red;
+    border-color: red;
+}
+
+.left-wall {
+    border-left-color: black;
+}
+.right-wall {
+    border-right-color: black;
+}
+.top-wall {
+    border-top-color: black;
+}
+.bottom-wall {
+    border-bottom-color: black;
+}

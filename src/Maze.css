@@ -1,0 +1,32 @@
+.maze {
+    border: 5px;
+    border-color: black;
+    border-left-color: red;
+    align: center;
+}
+
+.row {
+    display: flex;
+    justify-content: left;
+    align-self: left;
+    
+}
+
+.item {
+    width: 30px;
+    height: 30px;
+    border-color: black;
+    border: 3px;
+    margin: 0px;
+    text-align: left;
+}
+
+#unvisited {
+    background-color: black;
+}
+#visited {
+    background-color: white;
+}
+#fully_explored {
+    background-color: white;
+}

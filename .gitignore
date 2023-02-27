@@ -2,24 +2,18 @@
 node_modules
 
 # [ filetypes to ignore ]
-*.json
-*.json
 *.js
-*.ts
 *.map
 *.mjs
 *.flow
 *.yml
 *.BSD
 *.png
-*.css
-*.markdown
 *.sh
 *.coffee
 *.bnf
 *.cjs
 *.mts
-*.html
 *.cts
 *.sample
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.

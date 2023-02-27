@@ -1,5 +1,5 @@
 import { stringify } from 'querystring';
-import { createElement } from 'react';
+import { createElement, useState } from 'react';
 import { generate_maze, State, Maze} from './dataStructures/maze_generator';
 
 
@@ -9,7 +9,7 @@ export function draw_maze(maze: Maze, x: number, y: number) {
     }
 
     const get_walls = (x_idx: number, y_idx: number): string => {
-        const index = y_idx * y + x_idx;
+        const index = y_idx * x + x_idx;
         const node_walls = maze.walls[index];
         var wall_class_names = "";
 
@@ -40,7 +40,7 @@ export function draw_maze(maze: Maze, x: number, y: number) {
                 wall_class_names += "right-wall ";
             } else{}
         });
-        console.log("walls for index: ",index, ": ", node_walls);
+        //console.log("index for neighbur walls: ",index, ": ", node_walls);
         return wall_class_names;
     }
     
@@ -51,7 +51,7 @@ export function draw_maze(maze: Maze, x: number, y: number) {
             {rows.map((_, y_idx) => (
                 <div className='row' >
                     {maze.node_status
-                        .slice(y * y_idx, y * y_idx + x)
+                        .slice(x * y_idx, x * y_idx + x)
                         .map((status, x_idx) => (
                         <div className={'items ' + set_id(status) + get_walls(x_idx, y_idx)}>
                         </div>
@@ -63,10 +63,51 @@ export function draw_maze(maze: Maze, x: number, y: number) {
 }
 
 
-export default function Maze() {
-    const x = 10;
-    const y = 10;
-    const mazes = generate_maze(x, y);
+function delay(ms: number) {
+    setTimeout(() => {}, ms);
+}
 
+
+export default function IterableMaze(x: number, y: number): [Maze, () => void, () => void] {
+    const [index, setIndex] = useState<number>(0);
+    const [mazes, _] = useState(generate_maze(x,y));
+    const [current_maze, setMaze] = useState<Maze>(mazes[0]);
+
+    const increment_index = () => {
+        if (index < mazes.length) {
+            setIndex(index + 1);
+            set_current_maze(); 
+        } else {}
+    }
+    const decrement_index = () => {
+        if (index > 0) {
+            setIndex(index - 1);
+            set_current_maze(); 
+        } else {}
+    }
+    const set_current_maze = () => {
+        setMaze(mazes[index]);
+    }
     
+    return [current_maze, increment_index, decrement_index ];
+} 
+
+export function MazeMain() {
+    const x = 5;
+    const y = 5;
+    const [current_maze, increment_index, decrement_index] = IterableMaze(x, y);
+    
+    return (
+        <div className='interface'>
+            {draw_maze(current_maze, x, y)}
+            <div className='buttons'>
+                <button className='decrement' onClick={decrement_index}>decrement</button>
+                <button className='increment' onClick={increment_index}>increment</button>
+            </div>
+        </div>
+    );
+
+
+
+
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import './Maze.css';
 import { MazeMain } from './Maze';
 
 function App() {

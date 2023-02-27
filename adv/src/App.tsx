@@ -1,7 +1,8 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Array_to_sort from './components/array_bar'
+import './style/array_style.css'
+import Array_bar from './components/array_bar'
 
 
 //Interface for components
@@ -9,9 +10,9 @@ import Array_to_sort from './components/array_bar'
 function App() {
   return (
     <div className="App">
-     <Array_to_sort />
+      <Array_bar />
     </div>
   );
 }
 
-export default App;
+export default App; 

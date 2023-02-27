@@ -1,0 +1,19 @@
+.array-bar {
+    margin : 50px;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+}
+
+.array-container {
+    width: 30px;
+    height: 30px;
+    border-color: black;
+    border-style: double;
+    margin: 2px;
+    text-align: center;
+}
+.array-bar button {
+    width: 50px;
+    height: 50px;
+}

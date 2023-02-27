@@ -4,13 +4,12 @@ import { random_permutation } from "../algorithms/random_permutation";
 //Array for testing
 const A = random_permutation(10);
 
-const Array_to_sort: React.FC = () => {
+const Array_bar: React.FC = () => {
     const [items, setItems] = useState<number[]>(A);
     
 
     function handleClick() {
         setItems([1,2,3,4]);
-        console.log(frames)
     }
     
     return (
@@ -25,4 +24,4 @@ const Array_to_sort: React.FC = () => {
     )
 };
 
-export default Array_to_sort;
+export default Array_bar;

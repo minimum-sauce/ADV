@@ -7,8 +7,8 @@ type Props = {
 
 /**
  * Renders a React functional component 
- * @param props {value: value to be displayed, idx: index for key mapping}
- * @returns a react component  
+ * @param props value: value to be displayed, idx: index for key mapping
+ * @returns a square container to display values
  */
 const Container: React.FC<Props> = (props) => {
     

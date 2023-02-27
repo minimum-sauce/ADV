@@ -6,7 +6,7 @@ type State = {
     ref: Focus
 }
 
-export function insertionSort(list: number[]): number[] {
+export function insertion_sort(list: number[]): number[] {
     let current:Focus = null;
     let ref:Focus = null;
     //const save = () => saveFrame([...list], current, ref)
@@ -37,6 +37,5 @@ export function insertionSort(list: number[]): number[] {
             }
         }
     }
-
     return list;
-}
+};

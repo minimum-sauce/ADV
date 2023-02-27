@@ -7,7 +7,7 @@ interface Props {
 }
 
 const Array_bar: React.FC<Props> = (props) => {
-    
+
     return (
         <div className="array-bar">
             {props.array.map((value, idx) => (
@@ -16,9 +16,5 @@ const Array_bar: React.FC<Props> = (props) => {
         </div>
     )
 };
-
-
-
-
 
 export default Array_bar;

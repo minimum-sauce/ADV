@@ -1,9 +1,11 @@
 import React, {useState} from "react";
 import { random_permutation } from "../algorithms/random_permutation";
+import { insertion_sort } from "../algorithms/insertion_sort";
 import Array_bar from "./array_bar";
 
 interface Props {
-    algo?: () => void
+    algo: (list: number[]) => number[],
+    array_init: number[]
     frames?: number[][]
     length: number
 }
@@ -15,20 +17,20 @@ const C = [3,4,5];
 const D = [A, B, C];
 
 const Sorter: React.FC<Props> = (props) => {
-    const array_init = random_permutation(props.length);
-    const [items, setItems] = useState<number[]>(array_init);
+    const init = props.array_init
+    const [items, setItems] = useState<number[]>(init);
 
-    function handleClick() {
-        setItems(random_permutation(props.length));
+    
+    
+    function sort() {
+        setItems(props.algo(init));
     }
     
     return (
         <div className="sorter">
-            {D.map((value) => (
-                <Array_bar array={value}/>
-            ))}
-            
-            <button onClick={handleClick}>Scramble</button>
+            <Array_bar array={init}/>
+            <button onClick={sort}>{"<"}</button>
+            <button onClick={sort}>{">"}</button>
         </div>
     )
 };

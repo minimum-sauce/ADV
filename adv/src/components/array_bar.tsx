@@ -4,6 +4,7 @@ import Container from "./array_container";
 
 interface Props {
     array: number[]
+    idx?: number;
 }
 
 const Array_bar: React.FC<Props> = (props) => {
@@ -11,7 +12,7 @@ const Array_bar: React.FC<Props> = (props) => {
     return (
         <div className="array-bar">
             {props.array.map((value, idx) => (
-                <Container value={value} idx={idx}/>
+                <Container value={value} idx={idx} key={idx} />
             ))}
         </div>
     )

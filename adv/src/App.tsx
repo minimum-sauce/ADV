@@ -4,7 +4,7 @@ import './style/array_style.css'
 import Sorter from './components/sorter'
 import { insertion_sort } from './algorithms/insertion_sort';
 import { random_permutation } from './algorithms/random_permutation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 //Interface for components
 //Needs implementation of menu for selection 
@@ -16,30 +16,32 @@ const n = 10;                   //Should be inpout from user
 
 
 function App() {
-  const [items, setItems] = useState<number[]>([]);
-  const [length, setLength] = useState(0);
-
+  const [length, set_length] = useState(0);
+  const[items, set_items] = useState<Array<number>>([]);
 
   const generate_array = () => {
-    setItems(random_permutation(length));
+    if(length > 0){
+      set_items(random_permutation(length));
+    }
   }
-
+  
   return (
     <div>
-    <header className='header'>
-    <form onSubmit={generate_array}>
-        <label>Number of elements:
-          <input
-            type="number" 
-            value={length}
-            onChange={(e) => (setLength(+e.target.value))}
-          />
-        </label>
-      </form>
-      <button onClick={generate_array}>Generate</button>
-    </header>
+      <header className='header'>
+        <form onSubmit={generate_array}>
+            <label>Number of elements:
+              <input
+                type="number" 
+                value={length}
+                onChange={(e) => (set_length(+e.target.value))}
+              />
+            </label>
+            
+          </form>
+          <button onClick={generate_array}>Generate</button>
+        </header>
     <div className="App">
-        <Sorter algo={alg} array_init={items} length={n}/> 
+        <Sorter array_init={items}/> 
     </div>
     </div>
   );

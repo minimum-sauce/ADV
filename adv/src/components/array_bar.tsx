@@ -1,27 +1,31 @@
 import React, {useState, useEffect} from "react";
 import { random_permutation } from "../algorithms/random_permutation";
+import Container from "./array_container";
 
-//Array for testing
-const A = random_permutation(10);
+interface Props {
+    length: number
+}
 
-const Array_bar: React.FC = () => {
-    const [items, setItems] = useState<number[]>(A);
-    
+const Array_bar: React.FC<Props> = (props) => {
+    const [items, setItems] = useState<number[]>([]);
 
     function handleClick() {
-        setItems([1,2,3,4]);
+        setItems(random_permutation(props.length));
     }
     
     return (
         <div className="array-bar">
             {items.map((value, idx) => (
-                <div className="array-container" key={idx}>
-                    {value}
-                </div>
+                <Container value={value} idx={idx}/>
             ))}
-            <button onClick={handleClick}>Sort</button>
+
+            <button onClick={handleClick}>Scramble</button>
         </div>
     )
 };
+
+
+
+
 
 export default Array_bar;

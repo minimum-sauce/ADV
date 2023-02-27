@@ -1,5 +1,5 @@
-import { stringify } from 'querystring';
-import { createElement, useState } from 'react';
+import React from 'react';
+import { useState } from 'react';
 import { generate_maze, State, Maze} from './dataStructures/maze_generator';
 
 
@@ -44,7 +44,6 @@ export function draw_maze(maze: Maze, x: number, y: number) {
         return wall_class_names;
     }
     
-
     const rows = new Array<number>(y).fill(0);
     return (
         <div className='maze'>
@@ -60,11 +59,6 @@ export function draw_maze(maze: Maze, x: number, y: number) {
             ))}
         </div>
     );
-}
-
-
-function delay(ms: number) {
-    setTimeout(() => {}, ms);
 }
 
 
@@ -92,7 +86,7 @@ export default function IterableMaze(x: number, y: number): [Maze, () => void, (
     return [current_maze, increment_index, decrement_index ];
 } 
 
-export function MazeMain() {
+export function maze_function() {
     const x = 5;
     const y = 5;
     const [current_maze, increment_index, decrement_index] = IterableMaze(x, y);
@@ -106,8 +100,4 @@ export function MazeMain() {
             </div>
         </div>
     );
-
-
-
-
 }

@@ -1,4 +1,3 @@
-
 export interface ListGraph {
     node_neighburs: number[][];  
     size: number;

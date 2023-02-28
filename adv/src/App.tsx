@@ -27,7 +27,7 @@ export default function App() {
       case "insertion_sort": { 
         return (
           <div className='App' id="sorter">
-            <Sorter />
+            <Sorter algorithm={option}/>
           </div>
         )    
       }

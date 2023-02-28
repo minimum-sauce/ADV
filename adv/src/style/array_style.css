@@ -17,3 +17,11 @@
     width: auto;
     height: 50px;
 }
+
+#ref {
+    background-color: red;
+}
+
+#current {
+    background-color: green;
+}

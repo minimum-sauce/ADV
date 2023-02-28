@@ -1,6 +1,6 @@
 type Focus = number | null;
 export type States = Array<State>;
-type State = {
+export type State = {
     value: number[],
     current: Focus,
     reference: Focus
@@ -25,39 +25,42 @@ export const get_frames = () => {
     return steps;
 }
 
-export function insertion_sort(list: number[]): number[] {
+export function insertion_sort(list: number[]): States {
     reset_frames();
     let current:Focus = null;
     let ref:Focus = null;
-    save_frame([...list], current, ref);
-    
+    const save = () => save_frame([...list], current, ref)
+    save();
     
     IndexIterator:
     for (let i = 1; i < list.length; i++) {
         const valueToSort = list[i];
-        current = i;
-        save_frame([...list], current, ref)
+        current = i
+        ref = null;
+        save();
         InsertionIterator:
         for (let j = i - 1; j >= 0; j--) {
             ref = j;
-            save_frame([...list], current, ref)
+            save();
             if (valueToSort >= list[j]) {
                 list[j + 1] = valueToSort;
                 ref = null;
-                save_frame([...list], current, ref)
+                current = null;
+                save();
                 continue IndexIterator;
             } else {
                 list[j + 1] = list[j];
                 list[j] = valueToSort;
+                save();
                 ref = null;
-                save_frame([...list], current, ref)
                 current = current - 1;
-                
+                save();
                 continue InsertionIterator;
             }
         }
     }
-    return list;
+
+    return steps;
     
 };
 

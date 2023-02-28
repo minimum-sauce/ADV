@@ -4,7 +4,7 @@ import React from "react";
 type Props = {
     value:number,
     idx: number,
-    id?: string
+    style: string
 }
 
 /**
@@ -16,7 +16,7 @@ type Props = {
 const Container: React.FC<Props> = (props) => {
     
     return (
-        <div className="array-container" key={props.idx} id={props.id}>
+        <div className="array-container" key={props.idx} id={props.style}>
             {props.value}
         </div>
     )

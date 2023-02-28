@@ -59,7 +59,9 @@ export function insertion_sort(list: number[]): States {
             }
         }
     }
-
+    current = null;
+    ref = null;
+    save();
     return steps;
     
 };

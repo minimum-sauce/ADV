@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useRef} from "react";
 import { insertion_sort, get_frames, type States, State } from "../algorithms/insertion_sort";
 import { random_permutation } from "../algorithms/random_permutation";
 import Array_bar from "./array_bar";
@@ -10,48 +10,51 @@ interface Props {
 
 const initState: State = {value: [], current: null, reference: null};
 
-let frame_index = 0;
+
 
 const Sorter: React.FC<Props> = (props) => {
-
+    const frame_index = useRef(0);
+    const [show_stepper, set_show] = useState<boolean>(false)
     const [items, set_items] = useState<number[]>([]);
     const [length, set_length] = useState<number>(0);
     const [frames, set_frames] = useState<States>([initState]) 
     
-    function stepper() {
-        set_frames(insertion_sort([...items]));
-    }
+    
 
     function generate_array(event:React.FormEvent<HTMLFormElement>): void {
+        set_show(true)
+        frame_index.current = 0;
+        const random_array = random_permutation(length)
+        set_items(random_array);
+        set_frames(insertion_sort([...random_array]));
         event.preventDefault();
-        set_items(random_permutation(length));
     }
 
     function stepBack() {
-        if(frame_index > 1) {
-            frame_index --;
-            const newFrame = frames[frame_index].value;
+        if(frame_index.current > 1) {
+            frame_index.current --;
+            const newFrame = frames[frame_index.current].value;
             set_items(newFrame);
-        } else {frame_index = 1;};
+        } else {frame_index.current = 1;};
         
     };
 
     function stepForw() {
-        if(frame_index < frames.length) {
-            frame_index ++;
-            const newFrame = frames[frame_index].value;
+        if(frame_index.current < frames.length - 1) {
+            frame_index.current ++;
+            const newFrame = frames[frame_index.current].value;
             set_items(newFrame);  
-        } else {frame_index = frames.length};
+        } else {frame_index.current = frames.length - 1};
         
     }
 
     function get_current() {
-        const curr = frames[frame_index].current 
+        const curr = frames[frame_index.current].current 
             return curr;
     }
 
     function get_reference() {
-        const ref = frames[frame_index].reference
+        const ref = frames[frame_index.current].reference
             return ref;
     }
     
@@ -63,6 +66,8 @@ const Sorter: React.FC<Props> = (props) => {
               <input
                 type="number" 
                 value={length}
+                min="0"
+
                 onChange={(e) => (set_length(+e.target.value))}
               />
             </label>
@@ -72,14 +77,14 @@ const Sorter: React.FC<Props> = (props) => {
                     className="btn btn-dark btn-block" 
                 />
           </form>
-          
         </header>
-        <div className="array-bar">
+        <div className="array-bar" >
             <Array_bar array={items} current={get_current()} reference={get_reference()}/>
         </div>
-            <button onClick={stepBack}>Back</button>
-            <button onClick={stepper}>Start</button>
-            <button onClick={stepForw}>Next</button>
+        <div style={{ display: show_stepper ? "block" : "none" }}>
+            <button id="button-28" role="button" onClick={stepBack}>{"<"}</button>
+            <button id="button-28" role="button" onClick={stepForw}>{">"}</button>
+        </div>
         </>
     )
 };

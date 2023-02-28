@@ -8,3 +8,8 @@
   justify-content: center;
   text-align: center;
 }
+
+.header button {
+  margin-left: 40px;
+  margin-right: 40px;
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { generate_maze, State, Maze} from './dataStructures/maze_generator';
+import { generate_maze, State, Maze} from '../algorithms/maze_generator';
 
 
 export function draw_maze(maze: Maze, x: number, y: number) {
@@ -86,7 +86,7 @@ export default function IterableMaze(x: number, y: number): [Maze, () => void, (
     return [current_maze, increment_index, decrement_index ];
 } 
 
-export function maze_function() {
+export function MazeMain() {
     const x = 5;
     const y = 5;
     const [current_maze, increment_index, decrement_index] = IterableMaze(x, y);

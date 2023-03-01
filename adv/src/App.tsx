@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Sorter from './components/Sorter'
-import { MazeMain } from './components/Maze';
+import { IterableMaze } from './components/Maze';
 
 import './style/App.css';
 import './style/array_style.css';
@@ -46,7 +46,7 @@ export default function App() {
       case "dfs_maze": { 
         return (
           <div className='App' id="sorter">
-            <MazeMain />
+            <IterableMaze />
           </div>
         )    
       }

@@ -13,6 +13,8 @@ export interface Maze {
     walls: Array<Array<number>>;
     grid_graph: ListGraph; 
     node_status: Array<State>;
+    width: number;
+    height: number;
 }
 
 function list_graph_deep_copy(graph: ListGraph) {
@@ -41,6 +43,8 @@ function init_maze(width: number, height: number): Maze {
         walls: grid_graph.node_neighburs,
         grid_graph: grid_graph,
         node_status: new Array<State>(grid_graph.size).fill(State.unvisited),
+        width,
+        height,
     };
 }
 
@@ -52,7 +56,9 @@ function maze_remove_wall(maze: Maze, node: number, neighbur: number) {
 }
 
 
-function maze_clone(maze: Maze) {
+function maze_clone(maze: Maze): Maze {
+    const width = maze.width;
+    const height = maze.height;
     const grid_graph = list_graph_deep_copy(maze.grid_graph);
     const node_status = [...maze.node_status];
     const walls = new Array<number[]>(maze.walls.length);
@@ -62,7 +68,9 @@ function maze_clone(maze: Maze) {
     return {
         grid_graph, 
         node_status, 
-        walls
+        walls,
+        width,
+        height,
     };
 
 }

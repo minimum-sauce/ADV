@@ -51,11 +51,17 @@ const Sorter: React.FC<Props> = (props) => {
         const curr = frames[frame_index.current].current 
             return curr;
     }
-    
+
     function get_reference() {
         const ref = frames[frame_index.current].reference
             return ref;
     }
+
+
+    function play () {
+        setInterval(()=>step_forw(), 500)
+    }
+    
     
     return (
         <>
@@ -82,6 +88,7 @@ const Sorter: React.FC<Props> = (props) => {
         </div>
         <div style={{ display: show_stepper_buttons ? "block" : "none" }}>
             <button id="button-28" role="button" onClick={step_back}>{"<"}</button>
+            <button onClick={play}>Play</button>
             <button id="button-28" role="button" onClick={step_forw}>{">"}</button>
         </div>
         </>

@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { random_permutation } from './Permutation';
+import { random_permutation } from './random_permutation';
+import  '../style/MergeSort.css'
 
 type States = Array<State>;
 type State = {
   arr_left: number[],
   arr_right: number[],
-  position?: string,
+  position: string,
   
 }
 
@@ -13,11 +14,11 @@ type State = {
 const randomArray: number[] = random_permutation(6);
 let History: States = [];
 
-function save_state(A_1: number[], A_2: number[], position?: string): void{
+function save_state(A_left: number[], A_right: number[], position: string): void{
   History.push(
     {
-      arr_left: A_1,
-      arr_right: A_2,
+      arr_left: A_left,
+      arr_right: A_right,
       position: position,
     }
   );
@@ -28,14 +29,12 @@ function reset_history() {
 }
 
 function get_position(Current: number) {
-  if(History[Current].position) {
     return History[Current].position;
-  } else {}
 }
 
 
 
-function merge_sort(A: Array<number>): void {
+export function merge_sort(A: Array<number>): States {
   reset_history();
   save_state([...A], [], 'centre');
   function merge_sort_helper(A: Array<number>, low: number, high: number): void {
@@ -49,7 +48,7 @@ function merge_sort(A: Array<number>): void {
       merge_sort_helper(A, low, mid);
       save_state([A[mid + 1]], [], 'centre')
       if(A_right.length > 0) {
-        save_state(A_right, [], 'right');
+        save_state([], A_right, 'right');
       }
       merge_sort_helper(A, mid + 1, high);
       merge(A, low, mid, high);
@@ -86,12 +85,13 @@ function merge_sort(A: Array<number>): void {
     save_state([...B], [], 'centre');
   }
   merge_sort_helper(A, 0, A.length - 1);
+  return History;
 };
 
 merge_sort(randomArray);
 
 
-const Test: React.FC = () => {
+const Merge_Main: React.FC = () => {
   const [Current, setCurrent] = useState(0);
   console.log(Current);
   
@@ -112,7 +112,7 @@ const Test: React.FC = () => {
     }else{}
   }
   return (
-    <div className='something'>
+    <div>
       <div className='buttons'>
             <button onClick={scrambleClick}>{'Scramble'}</button>
             <button onClick={sortClick}>{'Sort'}</button> 
@@ -144,4 +144,4 @@ const Test: React.FC = () => {
   )
 };
 
-export default Test;
+export default Merge_Main;

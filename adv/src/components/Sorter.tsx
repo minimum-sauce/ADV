@@ -1,7 +1,7 @@
 import React, {useEffect, useState, useRef} from "react";
 import { insertion_sort, get_frames, type States, State } from "../algorithms/insertion_sort";
 import { random_permutation } from "../algorithms/random_permutation";
-import Array_bar from "./array_bar";
+import Array_bar from "./ArrayBar";
 
 
 interface Props {
@@ -9,8 +9,6 @@ interface Props {
 }
 
 const initState: State = {value: [], current: null, reference: null};
-
-
 
 const Sorter: React.FC<Props> = (props) => {
     const frame_index = useRef(0);
@@ -37,7 +35,7 @@ const Sorter: React.FC<Props> = (props) => {
             set_items(newFrame);
         } else {frame_index.current = 1;};
         
-    };
+    }
 
     function stepForw() {
         if(frame_index.current < frames.length - 1) {
@@ -67,7 +65,7 @@ const Sorter: React.FC<Props> = (props) => {
                 type="number" 
                 value={length}
                 min="0"
-
+                defaultValue={5}
                 onChange={(e) => (set_length(+e.target.value))}
               />
             </label>

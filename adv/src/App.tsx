@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import Sorter from './components/sorter'
+import Sorter from './components/Sorter'
 import { insertion_sort } from './algorithms/insertion_sort';
 import { random_permutation } from './algorithms/random_permutation';
 //import Array_bar from './components/array_bar';
@@ -9,8 +9,6 @@ import './style/App.css';
 import './style/array_style.css';
 import './style/Maze.css';
 import Merge_Main from './algorithms/MergeSort';
-
-
 
 
 export default function App() {

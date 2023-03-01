@@ -1,5 +1,5 @@
 /**
- * Takes a number and makes a permutation 
+ * Takes a number and generates a permutated array 
  * @param length number: the length for the Array
  * @returns Array: an Array with a permutation of the numbers from 0-(length-1)
  */

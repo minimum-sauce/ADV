@@ -8,6 +8,7 @@ import { MazeMain } from './components/Maze';
 import './style/App.css';
 import './style/array_style.css';
 import './style/Maze.css';
+import Merge_Main from './algorithms/MergeSort';
 
 
 
@@ -35,7 +36,7 @@ export default function App() {
         //Insert merge_sort 
         return (
           <div className='App' id="sorter">
-            
+            <Merge_Main />
           </div>
         )    
       }

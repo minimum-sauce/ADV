@@ -1,7 +1,7 @@
 /**
  * Takes a number and makes a permutation 
  * @param length number: the length for the Array
- * @returns Array: an Array with a permutation of the numbers from 0-(number-1)
+ * @returns Array: an Array with a permutation of the numbers from 0-(length-1)
  */
 export function random_permutation(length: number): Array<number> {
 

@@ -11,7 +11,7 @@ type State = {
 }
 
 
-const randomArray: number[] = random_permutation(6);
+const randomArray: number[] = random_permutation(5);
 let History: States = [];
 
 function save_state(A_left: number[], A_right: number[], position: string): void{

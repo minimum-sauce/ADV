@@ -6,7 +6,11 @@ export interface ListGraph {
 type EdgeList = Array<[number, number]> 
 
 
-
+/* 
+* create a new graph
+* @param size - how many nodes the graph should habe
+* @returns returns a graph with the given size 
+*/
 export function graph_create_new(size: number) {
     const node_neighburs = new Array<number[]>(size).fill([]);
     return {
@@ -15,17 +19,22 @@ export function graph_create_new(size: number) {
     };
 }
 
+//export function graph_create_from_edge_list(size: number, 
+//                                            edge_list: EdgeList): ListGraph {
+//    const graph = graph_create_new(size);
+//    edge_list.forEach(([node, new_neighbur]) => {
+//        const neighburs = graph.node_neighburs[node];
+//        graph.node_neighburs[node] = neighburs.concat(new_neighbur);
+//    });
+//    return graph;
+//}
 
-export function graph_create_from_edge_list(size: number, 
-                                            edge_list: EdgeList): ListGraph {
-    const graph = graph_create_new(size);
-    edge_list.forEach(([node, new_neighbur]) => {
-        const neighburs = graph.node_neighburs[node];
-        graph.node_neighburs[node] = neighburs.concat(new_neighbur);
-    });
-    return graph;
-}
-
+/*
+* Creates a graph where the nodes are connected in a grid pattern 
+* @param width - the width of the grid
+* @param height - the height of the grid
+* @returns returns a graph where the nodes are connected as a grid
+* */
 export function graph_create_grid(width: number, height: number) {
     const size = width * height;
     const graph = graph_create_new(size);
@@ -56,16 +65,3 @@ export function graph_create_grid(width: number, height: number) {
 
 
 
-
-
-// --------------- testing ------------------
-const edge_list: EdgeList = [
-    [1, 2],
-    [1, 3],
-    [3, 4],
-    [4, 3],
-    [0, 2]
-]
-//console.log(graph_create_new(5));
-//console.log(graph_create_from_edge_list(5, edge_list));
-console.log(graph_create_grid(4, 4));

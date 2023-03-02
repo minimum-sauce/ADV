@@ -4,8 +4,8 @@ import Container from "./ArrayContainer";
 // Properties for the array bar component
 interface Props {
     array: number[]
-    current: number | null;
-    reference: number | null;
+    current?: number;
+    reference?: number;
 }
 
 /**

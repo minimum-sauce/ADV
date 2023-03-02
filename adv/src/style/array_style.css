@@ -22,9 +22,9 @@
 }
 #ref {
     background-color: red;
-    transform: scale(1.2);
 }
 
 #current {
     background-color: green;
+    transform: scale(1.2);
 }

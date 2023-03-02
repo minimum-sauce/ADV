@@ -6,6 +6,7 @@ import './style/App.css';
 import './style/array_style.css';
 import './style/Maze.css';
 import Merge_Main from './algorithms/MergeSort';
+import Selection_main from './algorithms/selection_sort';
 
 
 export default function App() {
@@ -28,10 +29,16 @@ export default function App() {
         )    
       }
       case "merge_sort": { 
-        //Insert merge_sort 
         return (
           <div className='App' id="sorter">
             <Merge_Main />
+          </div>
+        )    
+      }
+      case "selection_sort": { 
+        return (
+          <div className='App' id="sorter">
+            <Selection_main />
           </div>
         )    
       }
@@ -64,6 +71,7 @@ export default function App() {
       <header className='header'>
           <button onClick={()=> {set_option("insertion_sort")}}>Insertion sort</button>
           <button onClick={()=> {set_option("merge_sort")}}>Merge sort</button>
+          <button onClick={()=> {set_option("selection_sort")}}>Selection sort</button>
           <button onClick={()=> {set_option("dfs_maze")}}>DFS Maze</button>
         </header>
           <div className="App">

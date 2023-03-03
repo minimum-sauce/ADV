@@ -8,7 +8,7 @@ interface Props {
     algorithm: string
 }
 
-const initState: State = {value: [], current: null, reference: null};
+const initState: State = {value: [], current: undefined, reference: undefined};
 
 const Sorter: React.FC<Props> = (props) => {
     const frame_index = useRef(0);

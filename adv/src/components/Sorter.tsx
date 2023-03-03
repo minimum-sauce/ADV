@@ -12,7 +12,7 @@ import ArrayBar from "./ArrayBar";
  * the insertion_sort algorithm
  */
 const InsertionSort = () => {
-    const initState: State = { value: [], current: undefined, reference: undefined };
+    const init_state: State = { value: [], current: undefined, reference: undefined };
     const frame_index = useRef(0);
     const timer = useRef<NodeJS.Timer>();
 
@@ -23,8 +23,8 @@ const InsertionSort = () => {
     // state variable of the length of the array to be generated and a function to update it
     const [array_length, set_array_length] = useState<number>(0);
     // state variable of the the frames to step through and a function to update it
-    const [frames, set_frames] = useState<States>([initState])
-
+    const [frames, set_frames] = useState<States>([init_state])
+    // state variale to track state of play button and a function to update it 
     const [play, set_play] = useState(false)
 
     // event handeler for input from the html <form /> 
@@ -74,6 +74,7 @@ const InsertionSort = () => {
     function handle_play() {
         set_play(!play)
     }
+
 
     useEffect(() => {
         if (play) {

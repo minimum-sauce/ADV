@@ -22,12 +22,12 @@ export interface Maze {
 * @returns returns a clone of the given graph
 */
 function list_graph_clone(graph: ListGraph) {
-    const neighburs_copy = new Array<number[]>(graph.node_neighburs.length);
-    graph.node_neighburs.forEach((neighbur, index) => {
-        neighburs_copy[index] = [...neighbur]; 
+    const neighbours_copy = new Array<number[]>(graph.node_neighbours.length);
+    graph.node_neighbours.forEach((neighbour, index) => {
+        neighbours_copy[index] = [...neighbour]; 
     });
     return {
-        node_neighburs: neighburs_copy,
+        node_neighbours: neighbours_copy,
         size: graph.size,
     }
 }
@@ -55,7 +55,7 @@ function random_permutation<T>(array: Array<T>): Array<T> {
 function init_grid_maze(width: number, height: number): Maze {
     const grid_graph = graph_create_grid(width, height);
     return {
-        walls: grid_graph.node_neighburs, // walls between every node connected to eachother
+        walls: grid_graph.node_neighbours, // walls between every node connected to eachother
         grid_graph: grid_graph,
         node_status: new Array<State>(grid_graph.size).fill(State.unvisited),
         width,
@@ -63,10 +63,16 @@ function init_grid_maze(width: number, height: number): Maze {
     };
 }
 
-function maze_remove_wall(maze: Maze, node: number, neighbur: number) {
+/* 
+* removes a wall between two nodes in a maze
+* @param maze - the maze on which to operate
+* @param node - the node from which a wall should be removed
+* @param neighbour - the the neighbouring node from which to remove the wall between
+* */
+function maze_remove_wall(maze: Maze, node: number, neighbour: number) {
     maze.walls[node] = maze.walls[node]
-                            .filter((item) => item != neighbur);
-    maze.walls[neighbur] = maze.walls[neighbur]
+                            .filter((item) => item != neighbour);
+    maze.walls[neighbour] = maze.walls[neighbour]
                             .filter((item) => item != node);
 }
 
@@ -82,8 +88,8 @@ function maze_clone(maze: Maze): Maze {
     const grid_graph = list_graph_clone(maze.grid_graph);
     const node_status = [...maze.node_status];
     const walls = new Array<number[]>(maze.walls.length);
-    maze.walls.forEach((neighbur, index) => {
-        walls[index] = [...neighbur]; 
+    maze.walls.forEach((neighbour, index) => {
+        walls[index] = [...neighbour]; 
     });
     return {
         grid_graph, 
@@ -109,12 +115,12 @@ export function generate_maze(width: number, height: number): Array<Maze> {
 
     function visit_node(node: number): void {
         maze.node_status[node] = State.visited;
-        const permuted_neighburs = random_permutation(maze.grid_graph.node_neighburs[node]);
+        const permuted_neighbours = random_permutation(maze.grid_graph.node_neighbours[node]);
         frames = frames.concat(maze_clone(maze));
-        permuted_neighburs.forEach((neighbur) => {
-            if (maze.node_status[neighbur] === State.unvisited) {
-                maze_remove_wall(maze, node, neighbur);
-                visit_node(neighbur);
+        permuted_neighbours.forEach((neighbour) => {
+            if (maze.node_status[neighbour] === State.unvisited) {
+                maze_remove_wall(maze, node, neighbour);
+                visit_node(neighbour);
             } else {}
         });
         maze.node_status[node] = State.fully_explored;

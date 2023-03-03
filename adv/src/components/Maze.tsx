@@ -77,8 +77,8 @@ export function draw_maze(maze: Maze) {
 }
 
 /* 
-*
-*
+* Main function creating the interface for use of the maze generation algorithm
+* @returns returns a react element containing the html code needed to display the maze generation
 * */
 export const IterableMaze: React.FC = () => {
     var timer_id: NodeJS.Timer;

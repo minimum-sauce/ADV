@@ -67,9 +67,10 @@
 }
 
 .stepper {
+  margin: 10px;
+  justify-content: center;
   display: inline-flex;
   gap: 8px;
-
 }
 
 .stepper button {
@@ -79,7 +80,6 @@
   all: unset;
   cursor: pointer;
   padding: 4px 8px 4px 8px;
-
   font-size: 24px;
   border: 2px;
   border-style: ridge;

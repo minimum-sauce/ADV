@@ -78,8 +78,8 @@ const MergeMain: React.FC = () => {
         <button onClick={scramble_click}>{'Scramble'}</button>
         <button onClick={unsort_click}>{'Unsort'}</button>
         <button onClick={sort_click}>{'Sort'}</button>
-        <Stepper prev={back_click} play={handle_play} next={next_click} state_play={play} />
       </div>
+      <Stepper prev={back_click} play={handle_play} next={next_click} state_play={play} />
       <div>Original array</div>
       <div className='array-bar'>
         {history[history_idx.current].top_arr.map((val, index) => (

@@ -40,7 +40,8 @@ const InsertionSort: React.FC = () => {
         const random_array = random_permutation(array_length)   //Generate random_array
         set_items(random_array);                                //Set the state of items to the array
         insertion_sort_steps([...random_array]);                //Run a copy of the array through the sorting algorithm    
-        set_frames(get_frames());                               //Set the state of frames to the recorded frames
+        set_frames(get_frames());
+        set_play(false);                               //Set the state of frames to the recorded frames
         event.preventDefault();                                 //Prevent interface reload
     }
 
@@ -86,7 +87,6 @@ const InsertionSort: React.FC = () => {
     return (
         <>
             <header className='sub-header'>
-
                 <form onSubmit={(e) => (handle_submit(e))}>
                     <label>Number of elements to sort:
                         <input

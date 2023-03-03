@@ -1,8 +1,9 @@
 .sub-header {
     margin: 20px;
 }
+
 .array-bar {
-    margin : 20px;
+    margin: 20px;
     display: flex;
     justify-content: center;
     align-self: center;
@@ -16,10 +17,12 @@
     margin: 2px;
     text-align: center;
 }
+
 .array-bar button {
     width: auto;
     height: 50px;
 }
+
 #ref {
     background-color: red;
 }

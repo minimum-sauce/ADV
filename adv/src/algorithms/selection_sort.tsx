@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { random_permutation } from "./random_permutation";
 
-type States= Array<State>;
+type States = Array<State>;
 type State = {
     arr: Array<number>,
     current?: number,
@@ -19,15 +19,15 @@ function add_state(history: States, arr: Array<number>, current?: number, ref?: 
 
 function find_smallest<T>(arr: Array<T>, min: number, max: number): number {
     let smallest: number = min;
-    for(let i: number = min + 1; i <= max; i ++){
-        if(arr[i] < arr[smallest]){
+    for (let i: number = min + 1; i <= max; i++) {
+        if (arr[i] < arr[smallest]) {
             smallest = i;
-        } else {}
+        } else { }
     };
     return smallest;
 }
 
-function swap<T>(arr: Array<T>, x:number, y: number): void {
+function swap<T>(arr: Array<T>, x: number, y: number): void {
     const temp: T = arr[x];
     arr[x] = arr[y];
     arr[y] = temp;
@@ -36,7 +36,7 @@ function swap<T>(arr: Array<T>, x:number, y: number): void {
 export function selection_sort(history: States, arr: Array<number>): void {
     const len: number = arr.length;
     add_state(history, [...arr]);
-    for(let i: number = 0; i < len; i ++){
+    for (let i: number = 0; i < len; i++) {
         add_state(history, [...arr], i);
         let smallest = find_smallest(arr, i, len - 1);
         add_state(history, [...arr], i, smallest);

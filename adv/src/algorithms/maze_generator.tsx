@@ -10,7 +10,7 @@ export enum State {
 
 export interface Maze {
     walls: Array<Array<number>>;
-    grid_graph: ListGraph; 
+    grid_graph: ListGraph;
     node_status: Array<State>;
     width: number;
     height: number;
@@ -24,7 +24,7 @@ export interface Maze {
 function list_graph_clone(graph: ListGraph) {
     const neighbours_copy = new Array<number[]>(graph.node_neighbours.length);
     graph.node_neighbours.forEach((neighbour, index) => {
-        neighbours_copy[index] = [...neighbour]; 
+        neighbours_copy[index] = [...neighbour];
     });
     return {
         node_neighbours: neighbours_copy,
@@ -38,7 +38,7 @@ function list_graph_clone(graph: ListGraph) {
 * @returns returns an array where the values of the initial array has been randomly reordered
 * */
 function random_permutation<T>(array: Array<T>): Array<T> {
-    const permutation = Array.from(array.values()); 
+    const permutation = Array.from(array.values());
     for (var i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1)) % (i + 1);
         [permutation[i], permutation[j]] = [permutation[j], permutation[i]];
@@ -71,9 +71,9 @@ function init_grid_maze(width: number, height: number): Maze {
 * */
 function maze_remove_wall(maze: Maze, node: number, neighbour: number) {
     maze.walls[node] = maze.walls[node]
-                            .filter((item) => item != neighbour);
+        .filter((item) => item != neighbour);
     maze.walls[neighbour] = maze.walls[neighbour]
-                            .filter((item) => item != node);
+        .filter((item) => item != node);
 }
 
 
@@ -89,11 +89,11 @@ function maze_clone(maze: Maze): Maze {
     const node_status = [...maze.node_status];
     const walls = new Array<number[]>(maze.walls.length);
     maze.walls.forEach((neighbour, index) => {
-        walls[index] = [...neighbour]; 
+        walls[index] = [...neighbour];
     });
     return {
-        grid_graph, 
-        node_status, 
+        grid_graph,
+        node_status,
         walls,
         width,
         height,
@@ -110,7 +110,7 @@ function maze_clone(maze: Maze): Maze {
 * @returns returns a list of frames(instances of the maze) describing the process of the algorithm
 */
 export function generate_maze(width: number, height: number): Array<Maze> {
-    const maze = init_grid_maze(width, height); 
+    const maze = init_grid_maze(width, height);
     var frames: Array<Maze> = new Array<Maze>(0);
 
     function visit_node(node: number): void {
@@ -121,12 +121,12 @@ export function generate_maze(width: number, height: number): Array<Maze> {
             if (maze.node_status[neighbour] === State.unvisited) {
                 maze_remove_wall(maze, node, neighbour);
                 visit_node(neighbour);
-            } else {}
+            } else { }
         });
         maze.node_status[node] = State.fully_explored;
         frames = frames.concat(maze_clone(maze));
     }
-    
+
     visit_node(0);
     return frames;
 }

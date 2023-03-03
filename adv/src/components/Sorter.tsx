@@ -1,4 +1,4 @@
-import React, {useState, useRef} from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { insertion_sort_steps, get_frames, type States, State } from "../algorithms/insertion_sort";
 import { random_permutation } from "../algorithms/random_permutation";
 import ArrayBar from "./ArrayBar";
@@ -6,14 +6,15 @@ import ArrayBar from "./ArrayBar";
 
 /**
  * 
- * @returns A React functional component with functionality to 
+ * @returns A JSX element with functionality to 
  * generate a random array of input length
  * step through the steps of evaluation generated form passing the array to 
  * the insertion_sort algorithm
  */
-const InsertionSort: React.FC = () => {
-    const initState: State = {value: [], current: undefined, reference: undefined};
+const InsertionSort = () => {
+    const initState: State = { value: [], current: undefined, reference: undefined };
     const frame_index = useRef(0);
+    const timer = useRef<NodeJS.Timer>();
 
     // state variable to show stepper buttons and a function to update it
     const [show_stepper_buttons, set_show_stepper_buttons] = useState<boolean>(false)
@@ -22,11 +23,12 @@ const InsertionSort: React.FC = () => {
     // state variable of the length of the array to be generated and a function to update it
     const [array_length, set_array_length] = useState<number>(0);
     // state variable of the the frames to step through and a function to update it
-    const [frames, set_frames] = useState<States>([initState]) 
-    
-    
+    const [frames, set_frames] = useState<States>([initState])
+
+    const [play, set_play] = useState(false)
+
     // event handeler for input from the html <form /> 
-    function handle_submit(event:React.FormEvent<HTMLFormElement>): void {
+    function handle_submit(event: React.FormEvent<HTMLFormElement>): void {
         set_show_stepper_buttons(true)                          //Show stepper buttons
         frame_index.current = 0;                                //Reset frame_index
         const random_array = random_permutation(array_length)   //Generate random_array
@@ -38,72 +40,82 @@ const InsertionSort: React.FC = () => {
 
     // decrease fame_index and update state of items variable
     function step_back() {
-        if(frame_index.current > 1) {
-            frame_index.current --;
+        if (frame_index.current > 1) {
+            frame_index.current--;
             const new_frame = frames[frame_index.current].value;
             set_items(new_frame);
-        } else {frame_index.current = 1;};
-        
+        } else { frame_index.current = 1; };
+
     }
 
     // increase fame_index and update state of items variable
     function step_forw() {
-        if(frame_index.current < frames.length - 1) {
-            frame_index.current ++;
+        if (frame_index.current < frames.length - 1) {
+            frame_index.current++;
             const new_frame = frames[frame_index.current].value;
-            set_items(new_frame);  
-        } else {frame_index.current = frames.length - 1};
-        
+            set_items(new_frame);
+        } else { frame_index.current = frames.length - 1 };
+
     }
 
     // get index of the "current" element
     function get_current() {
-        const curr = frames[frame_index.current].current 
-            return curr;
+        const curr = frames[frame_index.current].current
+        return curr;
     }
 
     // get index of the "reference" element
     function get_reference() {
         const ref = frames[frame_index.current].reference
-            return ref;
+        return ref;
     }
 
     // play function to iterate over frames with 500ms delay
-    function play () {
-        setInterval(()=>step_forw(), 500)
+    function handle_play() {
+        set_play(!play)
     }
-    
-    
+
+    useEffect(() => {
+        if (play) {
+            timer.current = setInterval(() => step_forw(), 500)
+        }
+        return () => {
+            clearInterval(timer.current)
+        }
+
+    }, [play]);
+
+
     return (
         <>
-        <header className='sub-header'>
-             
-        <form onSubmit={(e) => (handle_submit(e))}>
-            <label>Number of elements to sort:
-              <input
-                type="number" 
-                value={array_length}
-                min="0"
-                defaultValue={5}
-                onChange={(e) => (set_array_length(+e.target.value))}
-              />
-            </label>
-                <input 
-                    type="submit"
-                    value="Generate"
-                    className="btn btn-dark btn-block" 
-                />
-          </form>
-        </header> 
-        <div className="array-bar" >
-            
-            <ArrayBar array={items} current={get_current()} reference={get_reference()}/>
-        </div>
-        <div style={{ display: show_stepper_buttons ? "block" : "none" }}>
-            <button onClick={step_back}>{"<"}</button>
-            <button onClick={play}>Play</button>
-            <button onClick={step_forw}>{">"}</button>
-        </div>
+            <header className='sub-header'>
+
+                <form onSubmit={(e) => (handle_submit(e))}>
+                    <label>Number of elements to sort:
+                        <input
+                            type="number"
+                            value={array_length}
+                            min="0"
+                            defaultValue={5}
+                            onChange={(e) => (set_array_length(+e.target.value))}
+                        />
+                    </label>
+                    <input
+                        type="submit"
+                        value="Generate"
+                        className="btn btn-dark btn-block"
+                    />
+                </form>
+            </header>
+            <div className="h-10 w-10 rounded-full" >
+
+                <ArrayBar array={items} current={get_current()} reference={get_reference()} />
+            </div>
+            <div style={{ display: show_stepper_buttons ? "block" : "none" }}>
+                <button onClick={step_back}>{"<"}</button>
+                <button onClick={handle_play}>{!play ? "Play" : "Pause"}</button>
+                <button onClick={step_forw}>{">"}</button>
+            </div>
         </>
     )
 };

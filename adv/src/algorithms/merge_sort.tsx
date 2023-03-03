@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 import { random_permutation } from './random_permutation';
-import  '../style/MergeSort.css'
+import '../style/MergeSort.css'
 
 type States = Array<State>;
 type State = {
   bottom_arr: number[],
   top_arr: number[],
-  colour?: number 
+  colour?: number
 }
 
 
-function save_state(history: States, bottom: number[], top: number[], colour?: number): void{
+function save_state(history: States, bottom: number[], top: number[], colour?: number): void {
   history.push({
     bottom_arr: bottom,
     top_arr: top,
-    colour: colour, 
+    colour: colour,
   });
 }
 
@@ -26,16 +26,16 @@ export function merge_sort(arr: Array<number>, history: States): void {
       const mid: number = Math.floor((low + high) / 2);
       const arr_left = arr.slice(low, mid + 1);
       const arr_right = arr.slice(mid + 1, high + 1);
-      if(arr_left.length > 0) { 
+      if (arr_left.length > 0) {
         save_state(history, arr_left, [...arr], low);
       }
       merge_sort_helper(arr, low, mid);
-      if(arr_right.length > 0) {
+      if (arr_right.length > 0) {
         save_state(history, arr_right, [...arr], mid + 1);
       }
       merge_sort_helper(arr, mid + 1, high);
       merge(arr, low, mid, high);
-    } else {}
+    } else { }
   }
   function merge(arr: Array<number>, low: number, mid: number, high: number): void {
     const b_arr: Array<number> = [];

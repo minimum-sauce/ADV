@@ -45,7 +45,7 @@ export function insertion_sort_steps(list: number[]): void {
     function save_frame(A: number[], current: Focus, ref: Focus): void {
         steps.push(
             {
-                value:A,
+                value: A,
                 current: current,
                 reference: ref
             }
@@ -53,38 +53,45 @@ export function insertion_sort_steps(list: number[]): void {
     }
 
     // Set initial state of current
-    let current:Focus = undefined;
+    let current: Focus = undefined;
     // Set initial state of reference
-    let ref:Focus = undefined;
+    let ref: Focus = undefined;
 
-    // Facilitates when saving a step 
+    // Facilitates when saving current state
     const save = () => save_frame([...list], current, ref)
 
     function insertion_sort(list: number[]): void {
         reset_frames();     //Reset steps
-        save();            
-        IndexIterator:
+        save();
+
+        index_iterator:
         for (let i = 1; i < list.length; i++) {
             const valueToSort = list[i];
+
             current = i
             ref = undefined;
             save();
-            InsertionIterator:
+
+            insertion_iterator:
             for (let j = i - 1; j >= 0; j--) {
                 ref = j;
                 save();
                 if (valueToSort >= list[j]) {
                     list[j + 1] = valueToSort;
+
                     ref = undefined;
                     current = undefined;
-                    continue IndexIterator;
+
+                    continue index_iterator;
                 } else {
                     list[j + 1] = list[j];
                     list[j] = valueToSort;
+
                     ref = current;
                     current = current - 1;
                     save();
-                    continue InsertionIterator;
+
+                    continue insertion_iterator;
                 }
             }
         }
@@ -92,6 +99,5 @@ export function insertion_sort_steps(list: number[]): void {
         ref = undefined;
         save();
     };
-
     insertion_sort(list);
 }

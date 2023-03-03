@@ -1,9 +1,9 @@
 export interface ListGraph {
-    node_neighbours: number[][];  
+    node_neighbours: number[][];
     size: number;
 }
 
-type EdgeList = Array<[number, number]> 
+type EdgeList = Array<[number, number]>
 
 
 /* 
@@ -37,13 +37,13 @@ export function graph_create_grid(width: number, height: number) {
         if (x > 0) {             // Not the left most element
             neighbours = neighbours.concat(index - 1);
         }
-        if ( x < (width - 1)) {  // Not the right most element
+        if (x < (width - 1)) {  // Not the right most element
             neighbours = neighbours.concat(index + 1);
         }
         if (y > 0) {             // Not first row
             neighbours = neighbours.concat(index - width);
         }
-        if ( y < (height - 1)) { // Not last row
+        if (y < (height - 1)) { // Not last row
             neighbours = neighbours.concat(index + width);
         }
         graph.node_neighbours[index] = graph.node_neighbours[index].concat(neighbours);

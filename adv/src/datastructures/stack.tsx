@@ -1,9 +1,9 @@
 function head<T, V>(pair: [T, V]): T {
-    return pair[0]; 
+    return pair[0];
 }
 
 function tail<T, V>(pair: [T, V]): V {
-    return pair[1]; 
+    return pair[1];
 }
 
 function is_null<T>(object: T | null): object is null {

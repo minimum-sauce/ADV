@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { useState } from 'react';
-import { generate_maze, State, Maze} from '../algorithms/maze_generator';
+import { generate_maze, State, Maze } from '../algorithms/maze_generator';
 
 
 /*
@@ -12,10 +12,10 @@ export function draw_maze(maze: Maze) {
     const x = maze.width;
     const y = maze.height;
     const set_id = (state: State): string => {
-        return (state + " "); 
+        return (state + " ");
     }
 
-    /* 
+    /**
     * checks which walls are precent for the current node and determines the relevant 
     * css classes used to draw the different walls
     * @param x_idx - the placement of the current node on the x-axis
@@ -42,23 +42,23 @@ export function draw_maze(maze: Maze) {
         }
 
         node_walls.forEach((neighbur) => {
-            if(neighbur === index - x) {
+            if (neighbur === index - x) {
                 wall_class_names += "top-wall ";
-            } else {} 
-            if(neighbur === index + x) {
+            } else { }
+            if (neighbur === index + x) {
                 wall_class_names += "bottom-wall ";
-            } else {}
-            if(neighbur === index - 1) {
+            } else { }
+            if (neighbur === index - 1) {
                 wall_class_names += "left-wall ";
-            } else {}
-            if(neighbur === index + 1) {
+            } else { }
+            if (neighbur === index + 1) {
                 wall_class_names += "right-wall ";
-            } else{}
+            } else { }
         });
 
         return wall_class_names;
     }
-    
+
     const rows = new Array<number>(y).fill(0);
     return (
         <div className='maze'>
@@ -67,9 +67,9 @@ export function draw_maze(maze: Maze) {
                     {maze.node_status
                         .slice(x * y_idx, x * y_idx + x)
                         .map((status, x_idx) => (
-                        <div className={'items ' + set_id(status) + get_walls(x_idx, y_idx)}>
-                        </div>
-                    ))}
+                            <div className={'items ' + set_id(status) + get_walls(x_idx, y_idx)}>
+                            </div>
+                        ))}
                 </div>
             ))}
         </div>
@@ -82,7 +82,7 @@ export function draw_maze(maze: Maze) {
 * */
 export const IterableMaze: React.FC = () => {
     var timer_id: NodeJS.Timer;
-    const index = useRef(0); 
+    const index = useRef(0);
     const [x, setX] = useState(5);
     const [y, setY] = useState(5);
     const [maze_frames, setFrames] = useState(generate_maze(x, y));
@@ -117,38 +117,38 @@ export const IterableMaze: React.FC = () => {
     }
 
     const play = () => {
-         setInterval(() => {
+        setInterval(() => {
             if (index.current < maze_frames.length) {
                 increment_index();
                 console.log("play index: ", index)
             }
-            
+
         }, 500);
     }
-    
+
     return (
         <div className='interface'>
             <form onSubmit={(e) => (generate_new_maze(e, timer_id))}>
-                <label>X: 
-                <input
-                    type="number"
-                    value={x}
-                    min="1"
-                    defaultValue={5}
-                    onChange={(e)=>(setX(+e.target.value))}/>
+                <label>X:
+                    <input
+                        type="number"
+                        value={x}
+                        min="1"
+                        defaultValue={5}
+                        onChange={(e) => (setX(+e.target.value))} />
                 </label>
-                <label>Y: 
-                <input
-                    type="number"
-                    value={y}
-                    min="1"
-                    defaultValue={5}
-                    onChange={(e)=>(setY(+e.target.value))}/>
+                <label>Y:
+                    <input
+                        type="number"
+                        value={y}
+                        min="1"
+                        defaultValue={5}
+                        onChange={(e) => (setY(+e.target.value))} />
                 </label>
-                <input type="submit" value="initialize" className='btn btn-dark btn-block'/>
+                <input type="submit" value="initialize" className='btn btn-dark btn-block' />
             </form>
             <div>
-            {draw_maze(current_maze)}
+                {draw_maze(current_maze)}
             </div>
             <div className='buttons'>
                 <button className='increment' onClick={increment_index}>increment</button>

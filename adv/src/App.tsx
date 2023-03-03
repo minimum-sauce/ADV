@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 import { IterableMaze } from './components/Maze';
 import MergeMain from './components/MergeSort';
 import SelectionMain from './components/SelectionSort';
+import InsertionSort from './components/Sorter';
 
 import './style/App.css';
 import './style/array_style.css';
@@ -21,57 +22,57 @@ export default function App() {
    * @returns A React component rendering your selected option 
    */
   function load(option: string) {
-    switch(option) { 
-      case "insertion_sort": { 
+    switch (option) {
+      case "insertion_sort": {
         return (
           <div className='App' id="sorter">
             <InsertionSort />
           </div>
-        )    
+        )
       }
-      case "merge_sort": { 
+      case "merge_sort": {
         return (
           <div className='App' id="sorter">
             <MergeMain />
           </div>
-        )    
+        )
       }
-      case "selection_sort": { 
+      case "selection_sort": {
         return (
           <div className='App' id="sorter">
             <SelectionMain />
           </div>
-        )    
+        )
       }
-      case "dfs_maze": { 
+      case "dfs_maze": {
         return (
           <div className='App' id="sorter">
             <IterableMaze />
           </div>
-        )    
+        )
       }
-      default: { 
-         return (
+      default: {
+        return (
           <h1>Welcome to ADV</h1>
-         ) 
-         
-      } 
-   } 
-  }    
-    
+        )
+
+      }
+    }
+  }
+
   return (
     <main>
       <header className='header'>
-          <button onClick={()=> {set_option("insertion_sort")}}>Insertion sort</button>
-          <button onClick={()=> {set_option("merge_sort")}}>Merge sort</button>
-          <button onClick={()=> {set_option("selection_sort")}}>Selection sort</button>
-          <button onClick={()=> {set_option("dfs_maze")}}>DFS Maze</button>
-        </header>
-          <div className="App">
-              {load(option)}
-          </div>
+        <button onClick={() => { set_option("insertion_sort") }}>Insertion sort</button>
+        <button onClick={() => { set_option("merge_sort") }}>Merge sort</button>
+        <button onClick={() => { set_option("selection_sort") }}>Selection sort</button>
+        <button onClick={() => { set_option("dfs_maze") }}>DFS Maze</button>
+      </header>
+      <div className="App">
+        {load(option)}
+      </div>
     </main>
-    
+
   );
 }
 

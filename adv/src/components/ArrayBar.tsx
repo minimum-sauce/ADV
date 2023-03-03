@@ -19,10 +19,10 @@ interface Props {
 const ArrayBar: React.FC<Props> = (props) => {
 
     //Sets the id for each Container component
-    function get_id(idx:number): string {
-        if(idx === props.current) {
+    function get_id(idx: number): string {
+        if (idx === props.current) {
             return "current"
-        } else if(idx === props.reference) {
+        } else if (idx === props.reference) {
             return "ref"
         } else {
             return "normal"

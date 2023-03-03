@@ -2,7 +2,7 @@ import React from "react";
 
 //Properties for the Container componenet
 type Props = {
-    value:number,
+    value: number,
     idx: number,
     focus: string
 }
@@ -16,7 +16,7 @@ type Props = {
  * @returns A React functional component displaying value and css-style of given id 
  */
 const Container: React.FC<Props> = (props) => {
-    
+
     return (
         <div className="array-container" key={props.idx} id={props.focus}>
             {props.value}

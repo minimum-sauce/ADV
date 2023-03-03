@@ -15,13 +15,13 @@ export function random_permutation(length: number): Array<number> {
         A[i] = A[j];
         A[j] = temp;
     }
-    
+
     const result = Array<number>(length)
     for (let i = 0; i < length; i++) {
         result[i] = i;
     }
     for (let i = 0; i < length - 1; i++) {
-        const j = get_random_int(i,length)
+        const j = get_random_int(i, length)
         swap(result, i, j);
     }
     return result;

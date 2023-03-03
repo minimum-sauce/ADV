@@ -8,102 +8,41 @@ type State = {
     ref?: number
 };
 
-let history: States = [];
 
-function add_state(A: Array<number>, current?: number, ref?: number): void {
+function add_state(history: States, arr: Array<number>, current?: number, ref?: number): void {
     history.push({
-        arr: A,
+        arr: arr,
         current: current,
         ref: ref
     });
 }
 
-function get_id(Current: number, idx: number){
-    if(idx === history[Current].current){
-        return 'current';
-    }else if(idx === history[Current].ref){
-        return 'ref'
-    }
-}
-
-function reset_history(): void {
-    history = [];
-}
-
-function find_smallest<T>(A: Array<T>, min: number, max: number): number {
+function find_smallest<T>(arr: Array<T>, min: number, max: number): number {
     let smallest: number = min;
     for(let i: number = min + 1; i <= max; i ++){
-        if(A[i] < A[smallest]){
+        if(arr[i] < arr[smallest]){
             smallest = i;
         } else {}
     };
     return smallest;
 }
 
-function swap<T>(A: Array<T>, x:number, y: number): void {
-    const temp: T = A[x];
-    A[x] = A[y];
-    A[y] = temp;
+function swap<T>(arr: Array<T>, x:number, y: number): void {
+    const temp: T = arr[x];
+    arr[x] = arr[y];
+    arr[y] = temp;
 }
 
-function selection_sort(A: Array<number>): States {
-    reset_history();
-    const len: number = A.length;
-    add_state([...A]);
+export function selection_sort(history: States, arr: Array<number>): void {
+    const len: number = arr.length;
+    add_state(history, [...arr]);
     for(let i: number = 0; i < len; i ++){
-        add_state([...A], i);
-        let smallest = find_smallest(A, i, len - 1);
-        add_state([...A], i, smallest);
-        swap(A, i, smallest);
-        add_state([...A], smallest, i);
-        add_state([...A]);
+        add_state(history, [...arr], i);
+        let smallest = find_smallest(arr, i, len - 1);
+        add_state(history, [...arr], i, smallest);
+        swap(arr, i, smallest);
+        add_state(history, [...arr], smallest, i);
+        add_state(history, [...arr]);
     };
-    return history;
 }
 
-selection_sort(random_permutation(10));
-
-const Selection_main: React.FC = () => {
-    const [Current, setCurrent] = useState(0);
-    console.log(Current);
-    const scrambleClick = () => {
-        selection_sort(random_permutation(10));
-        setCurrent(0);
-    }
-    const unsortClick = () => {
-        setCurrent(0);
-    }
-    const sortClick = () => {
-        setCurrent(history.length - 1);
-    }
-    const nextClick = () => {
-      if(Current < history.length - 1){
-        setCurrent(Current + 1);
-      }else{}
-    }
-    const backClick = () => {
-      if(Current > 0){
-        setCurrent(Current - 1);
-      }else{}
-    }
-    return (
-        <div>
-          <div className='buttons'>
-                <button onClick={scrambleClick}>{'Scramble'}</button>
-                <button onClick={unsortClick}>{'Unsort'}</button>
-                <button onClick={sortClick}>{'Sort'}</button> 
-                <button onClick={backClick}>{'<'}</button>
-                <button onClick={nextClick}>{'>'}</button>
-            </div>
-          <div className="array-bar">
-            {history[Current].arr.map((val, index) => (
-                <div className='array-container' key={index} id={get_id(Current, index)}>
-                    {val}
-                </div>
-            ))}
-            </div>
-        </div>
-    )
-}
-
-export default Selection_main;

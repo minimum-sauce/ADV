@@ -15,7 +15,7 @@ export function draw_maze(maze: Maze) {
         return (state + " "); 
     }
 
-    /* 
+    /**
     * checks which walls are precent for the current node and determines the relevant 
     * css classes used to draw the different walls
     * @param x_idx - the placement of the current node on the x-axis

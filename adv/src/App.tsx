@@ -1,12 +1,13 @@
 import React, {useState} from 'react';
 import Sorter from './components/Sorter'
 import { IterableMaze } from './components/Maze';
+import MergeMain from './components/MergeSort';
+import SelectionMain from './components/SelectionSort';
 
 import './style/App.css';
 import './style/array_style.css';
 import './style/Maze.css';
-import Merge_Main from './algorithms/MergeSort';
-import Selection_main from './algorithms/selection_sort';
+
 
 
 export default function App() {
@@ -31,14 +32,14 @@ export default function App() {
       case "merge_sort": { 
         return (
           <div className='App' id="sorter">
-            <Merge_Main />
+            <MergeMain />
           </div>
         )    
       }
       case "selection_sort": { 
         return (
           <div className='App' id="sorter">
-            <Selection_main />
+            <SelectionMain />
           </div>
         )    
       }

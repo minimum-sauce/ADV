@@ -1,5 +1,6 @@
 type Focus = number | undefined;
 export type States = Array<State>;
+
 export type State = {
     value: number[],
     current: Focus,

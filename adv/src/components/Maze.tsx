@@ -3,6 +3,11 @@ import { useState } from 'react';
 import { generate_maze, State, Maze} from '../algorithms/maze_generator';
 
 
+/*
+* creates a container for rendering the given maze  
+* @param maze - the maze to be generated
+* @returns returns a JSX element to render the given maze
+*/
 export function draw_maze(maze: Maze) {
     const x = maze.width;
     const y = maze.height;
@@ -10,6 +15,14 @@ export function draw_maze(maze: Maze) {
         return (state + " "); 
     }
 
+    /* 
+    * checks which walls are precent for the current node and determines the relevant 
+    * css classes used to draw the different walls
+    * @param x_idx - the placement of the current node on the x-axis
+    * @param y_idx - the placement of the current node on the y-axis
+    * @returns returns a string with the relevant css class names for drawing 
+    *          the walls of the current node 
+    */
     const get_walls = (x_idx: number, y_idx: number): string => {
         const index = y_idx * x + x_idx;
         const node_walls = maze.walls[index];
@@ -42,7 +55,7 @@ export function draw_maze(maze: Maze) {
                 wall_class_names += "right-wall ";
             } else{}
         });
-        //console.log("index for neighbur walls: ",index, ": ", node_walls);
+
         return wall_class_names;
     }
     
@@ -63,7 +76,10 @@ export function draw_maze(maze: Maze) {
     );
 }
 
-
+/* 
+* Main function creating the interface for use of the maze generation algorithm
+* @returns returns a react element containing the html code needed to display the maze generation
+* */
 export const IterableMaze: React.FC = () => {
     var timer_id: NodeJS.Timer;
     const index = useRef(0); 

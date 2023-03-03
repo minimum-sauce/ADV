@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
-import Sorter from './components/Sorter'
+
 import { IterableMaze } from './components/Maze';
 
 import './style/App.css';
 import './style/array_style.css';
 import './style/Maze.css';
+import InsertionSort from './components/Sorter'
 import Merge_Main from './algorithms/MergeSort';
 import Selection_main from './algorithms/selection_sort';
 
@@ -24,7 +25,7 @@ export default function App() {
       case "insertion_sort": { 
         return (
           <div className='App' id="sorter">
-            <Sorter algorithm={option}/>
+            <InsertionSort />
           </div>
         )    
       }
@@ -39,14 +40,6 @@ export default function App() {
         return (
           <div className='App' id="sorter">
             <Selection_main />
-          </div>
-        )    
-      }
-      case "incremental_sort": { 
-        //Insert incremental_sort
-        return (
-          <div className='App' id="sorter">
-            
           </div>
         )    
       }

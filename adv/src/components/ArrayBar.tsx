@@ -16,7 +16,7 @@ interface Props {
  * reference: index of the element to be passed id="reference"
  * @returns A React functional component of Containers given a value and a id
  */
-const Array_bar: React.FC<Props> = (props) => {
+const ArrayBar: React.FC<Props> = (props) => {
 
     //Sets the id for each Container component
     function get_id(idx:number): string {
@@ -38,4 +38,4 @@ const Array_bar: React.FC<Props> = (props) => {
     )
 };
 
-export default Array_bar;
+export default ArrayBar;

@@ -1,11 +1,11 @@
 /**
- * Takes a number and generates a permutated array 
+ * Given a number, generates a permutated array of given length
  * @param length number: the length for the Array
- * @returns Array: an Array with a permutation of the numbers from 0-(length-1)
+ * @returns Array: a permutation of the numbers 0 to (length-1)
  */
 export function random_permutation(length: number): Array<number> {
 
-    function getRandomInt(min: number, max: number): number {
+    function get_random_int(min: number, max: number): number {
         min = Math.ceil(min);
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min) + min);
@@ -21,7 +21,7 @@ export function random_permutation(length: number): Array<number> {
         result[i] = i;
     }
     for (let i = 0; i < length - 1; i++) {
-        const j = getRandomInt(i,length)
+        const j = get_random_int(i,length)
         swap(result, i, j);
     }
     return result;

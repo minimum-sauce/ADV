@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { merge_sort } from '../algorithms/merge_sort'
 import { random_permutation } from '../algorithms/random_permutation';
+import usePlay from '../hooks/usePlay';
 import Stepper from './Stepper'
 
 type States = Array<State>;
@@ -24,79 +25,78 @@ var random_array = random_permutation(6);
 merge_sort(random_array, history);
 
 const MergeMain: React.FC = () => {
+  const history_idx = useRef(0);
+  const [items, set_items] = useState<State>(history[history_idx.current]);
 
-  // state variale to track state of play button and a function to update it 
-  const [play, set_play] = useState(false)
-  const timer = useRef<NodeJS.Timer>();
-  // play function to iterate over frames with 500ms delay
-  function handle_play() {
-    set_play(!play)
-  }
-  //Reset Interval if play is active else initiate
-  useEffect(() => {
-    if (play) {
-      timer.current = setInterval(() => next_click(), 500)
-    }
-    return () => {
-      clearInterval(timer.current)
-    }
 
-  }, [play]);
 
-  const [history_idx, set_history_idx] = useState(0);
   const scramble_click = () => {
     history = [];
     random_array = random_permutation(6);
     merge_sort(random_array, history);
-    set_history_idx(0);
+    history_idx.current = 0;
+    set_items(history[history_idx.current])
   }
-  const unsort_click = () => {
-    set_history_idx(0);
-  }
-  const sort_click = () => {
-    set_history_idx(history.length - 1);
-  }
-  const next_click = () => {
-    if (history_idx < history.length - 1) {
-      set_history_idx((x) => x + 1);
 
-    } else { }
+  const unsort_click = () => {
+    history_idx.current = 0;
+    set_items(history[history_idx.current])
+  }
+
+  const sort_click = () => {
+    history_idx.current = history.length - 1;
+    set_items(history[history_idx.current])
+  }
+
+  const next_click = () => {
+    if (history_idx.current < history.length - 1) {
+      history_idx.current++;
+      set_items(history[history_idx.current])
+    } else { set_play(false) }
   }
 
   const back_click = () => {
-    if (history_idx > 0) {
-      set_history_idx(history_idx - 1);
+    if (history_idx.current > 0) {
+      history_idx.current--;
+      set_items(history[history_idx.current])
     } else { }
   }
 
+  const { play, set_play } = usePlay(next_click);
+
+  function handle_play() {
+    if (history_idx.current === history.length - 1) {
+      history_idx.current = 0;
+    }
+    set_play(!play)
+  }
 
 
   return (
-    <div>
+    <div className='App'>
       <div className='buttons'>
         <button onClick={scramble_click}>{'Scramble'}</button>
         <button onClick={unsort_click}>{'Unsort'}</button>
         <button onClick={sort_click}>{'Sort'}</button>
-        <Stepper prev={back_click} play={handle_play} next={next_click} />
+        <Stepper prev={back_click} play={handle_play} next={next_click} state_play={play} />
       </div>
-      <div>
-        <div>Original array</div>
-        <div className='array-bar'>
-          {history[history_idx].top_arr.map((val, index) => (
-            <div className='array-container' key={index} id={get_id(history, history_idx, index)}>
-              {val}
-            </div>
-          ))}
-        </div>
-        <div className='array-bar'>
-          {history[history_idx].bottom_arr.map((val1, idx1) => (
-            <div className='array-container' key={idx1}>
-              {val1}
-            </div>
-          ))}
-        </div>
+      <div>Original array</div>
+      <div className='array-bar'>
+        {history[history_idx.current].top_arr.map((val, index) => (
+          <div className='array-container' key={index} id={get_id(history, history_idx.current, index)}>
+            {val}
+          </div>
+        ))}
+      </div>
+      <div className='array-bar'>
+        {history[history_idx.current].bottom_arr.map((val1, idx1) => (
+          <div className='array-container' key={idx1}>
+            {val1}
+          </div>
+        ))}
       </div>
     </div>
+
   )
 };
 

@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import { useState } from 'react';
 import { generate_maze, State, Maze } from '../algorithms/maze_generator';
+import usePlay from '../hooks/usePlay';
+import Stepper from './Stepper';
 
 
 /*
@@ -63,11 +65,11 @@ export function draw_maze(maze: Maze) {
     return (
         <div className='maze'>
             {rows.map((_, y_idx) => (
-                <div className='row' >
+                <div className='row' key={y_idx} >
                     {maze.node_status
                         .slice(x * y_idx, x * y_idx + x)
                         .map((status, x_idx) => (
-                            <div className={'items ' + set_id(status) + get_walls(x_idx, y_idx)}>
+                            <div className={'items ' + set_id(status) + get_walls(x_idx, y_idx)} key={x_idx}>
                             </div>
                         ))}
                 </div>
@@ -116,25 +118,20 @@ export const IterableMaze: React.FC = () => {
         }
     }
 
-    const play = () => {
-        setInterval(() => {
-            if (index.current < maze_frames.length) {
-                increment_index();
-                console.log("play index: ", index)
-            }
-
-        }, 500);
+    const { play, set_play } = usePlay(increment_index, 2);
+    // play function to iterate over frames with 500ms delay
+    function handle_play() {
+        set_play(!play)
     }
 
     return (
-        <div className='interface'>
+        <div className='App'>
             <form onSubmit={(e) => (generate_new_maze(e, timer_id))}>
                 <label>X:
                     <input
                         type="number"
                         value={x}
                         min="1"
-                        defaultValue={5}
                         onChange={(e) => (setX(+e.target.value))} />
                 </label>
                 <label>Y:
@@ -142,19 +139,20 @@ export const IterableMaze: React.FC = () => {
                         type="number"
                         value={y}
                         min="1"
-                        defaultValue={5}
                         onChange={(e) => (setY(+e.target.value))} />
                 </label>
                 <input type="submit" value="initialize" className='btn btn-dark btn-block' />
             </form>
-            <div>
-                {draw_maze(current_maze)}
-            </div>
             <div className='buttons'>
-                <button className='increment' onClick={increment_index}>increment</button>
-                <button className='play' onClick={() => play()}>play</button>
-                <button className='stop' onClick={() => clearInterval(timer_id)}>stop</button>
-                <button className='decrement' onClick={decrement_index}>decrement</button>
+                <Stepper
+                    next={increment_index}
+                    play={handle_play}
+                    prev={decrement_index}
+                    state_play={play}
+                />
+            </div>
+            <div className='maze-container'>
+                {draw_maze(current_maze)}
             </div>
         </div>
     );

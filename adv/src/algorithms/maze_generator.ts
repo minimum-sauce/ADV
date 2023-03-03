@@ -1,4 +1,4 @@
-import { ListGraph, graph_create_grid } from './ListGraph';
+import { ListGraph, graph_create_grid } from './list_graph';
 
 
 export enum State {

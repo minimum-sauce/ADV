@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { random_permutation } from './random_permutation';
-import '../style/MergeSort.css'
+
 
 type States = Array<State>;
 type State = {

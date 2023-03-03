@@ -1,77 +1,78 @@
-import React, { useState } from 'react';
-
+import React, { useState, createContext, useContext } from 'react';
+import { SpeedProvider } from './providers/SpeedProvider'
 import { IterableMaze } from './components/Maze';
 import MergeMain from './components/MergeSort';
 import SelectionMain from './components/SelectionSort';
 import InsertionSort from './components/Sorter';
+import SortSpeed from './components/SortSpeed';
 
 import './style/App.css';
 import './style/array_style.css';
 import './style/Maze.css';
+//import '../style/MergeSort.css'
 
-
+type SortTypes = "insertion_sort" | "selection_sort" | "merge_sort" | "dfs_maze"
 
 export default function App() {
 
   //A string state variable for chosing what component to load
-  const [option, set_option] = useState<string>("")
+  const [option, set_option] = useState<SortTypes>()
+
 
   /**
    * Switch-case to load a React component of the current state of option
    * @param option: string: a state variable 
    * @returns A React component rendering your selected option 
    */
-  function load(option: string) {
+  function load(option?: SortTypes) {
+
     switch (option) {
       case "insertion_sort": {
         return (
-          <div className='App' id="sorter">
-            <InsertionSort />
-          </div>
+          <InsertionSort />
         )
       }
       case "merge_sort": {
         return (
-          <div className='App' id="sorter">
-            <MergeMain />
-          </div>
+          <MergeMain />
         )
       }
       case "selection_sort": {
         return (
-          <div className='App' id="sorter">
-            <SelectionMain />
-          </div>
+          <SelectionMain />
         )
       }
       case "dfs_maze": {
         return (
-          <div className='App' id="sorter">
-            <IterableMaze />
-          </div>
+          <IterableMaze />
         )
       }
+
       default: {
         return (
           <h1>Welcome to ADV</h1>
         )
-
       }
     }
   }
 
   return (
-    <main>
-      <header className='header'>
-        <button onClick={() => { set_option("insertion_sort") }}>Insertion sort</button>
-        <button onClick={() => { set_option("merge_sort") }}>Merge sort</button>
-        <button onClick={() => { set_option("selection_sort") }}>Selection sort</button>
-        <button onClick={() => { set_option("dfs_maze") }}>DFS Maze</button>
-      </header>
-      <div className="App">
-        {load(option)}
-      </div>
-    </main>
+    <SpeedProvider>
+      <main>
+        <header className='header'>
+          <button onClick={() => { set_option("insertion_sort") }}>Insertion sort</button>
+          <button onClick={() => { set_option("merge_sort") }}>Merge sort</button>
+          <button onClick={() => { set_option("selection_sort") }}>Selection sort</button>
+          <button onClick={() => { set_option("dfs_maze") }}>DFS Maze</button>
+        </header>
+        <div className="App">
+          {load(option)}
+        </div>
+        <div>
+          {option && <SortSpeed max={500} min={10} step={50} />}
+        </div>
+      </main>
+    </SpeedProvider>
 
   );
 }

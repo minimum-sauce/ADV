@@ -48,7 +48,7 @@ const SelectionMain: React.FC = () => {
         } else { }
     }
     return (
-        <div>
+        <div className="App">
             <div className='buttons'>
                 <button onClick={scramble_click}>{'Scramble'}</button>
                 <button onClick={unsort_click}>{'Unsort'}</button>

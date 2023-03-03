@@ -7,6 +7,8 @@
     display: flex;
     justify-content: center;
     align-self: center;
+    max-width: 90%;
+    flex-wrap: wrap;
 }
 
 .array-container {

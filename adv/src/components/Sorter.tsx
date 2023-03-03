@@ -2,6 +2,10 @@ import React, { useState, useRef, useEffect } from "react";
 import { insertion_sort_steps, get_frames, type States, State } from "../algorithms/insertion_sort";
 import { random_permutation } from "../algorithms/random_permutation";
 import ArrayBar from "./ArrayBar";
+import Stepper from "./Stepper"
+import { Props } from "../datastructures/types"
+import { useSpeedProvider } from "../providers/SpeedProvider";
+import usePlay from "../hooks/usePlay";
 
 
 /**
@@ -11,25 +15,27 @@ import ArrayBar from "./ArrayBar";
  * step through the steps of evaluation generated form passing the array to 
  * the insertion_sort algorithm
  */
-const InsertionSort = () => {
+const InsertionSort: React.FC = () => {
+
     const init_state: State = { value: [], current: undefined, reference: undefined };
     const frame_index = useRef(0);
-    const timer = useRef<NodeJS.Timer>();
+
 
     // state variable to show stepper buttons and a function to update it
-    const [show_stepper_buttons, set_show_stepper_buttons] = useState<boolean>(false)
+    const [show_stepper, set_show_stepper] = useState<boolean>(false)
     // state variable of the array passed to <Array /> and a function to update it
     const [items, set_items] = useState<number[]>([]);
     // state variable of the length of the array to be generated and a function to update it
-    const [array_length, set_array_length] = useState<number>(0);
+    const [array_length, set_array_length] = useState<number>(5);
     // state variable of the the frames to step through and a function to update it
-    const [frames, set_frames] = useState<States>([init_state])
+    const [frames, set_frames] = useState<States>([init_state]);
     // state variale to track state of play button and a function to update it 
-    const [play, set_play] = useState(false)
+    const { play, set_play } = usePlay(step_forw);
+
 
     // event handeler for input from the html <form /> 
     function handle_submit(event: React.FormEvent<HTMLFormElement>): void {
-        set_show_stepper_buttons(true)                          //Show stepper buttons
+        set_show_stepper(true)                                  //Show stepper buttons
         frame_index.current = 0;                                //Reset frame_index
         const random_array = random_permutation(array_length)   //Generate random_array
         set_items(random_array);                                //Set the state of items to the array
@@ -54,7 +60,7 @@ const InsertionSort = () => {
             frame_index.current++;
             const new_frame = frames[frame_index.current].value;
             set_items(new_frame);
-        } else { frame_index.current = frames.length - 1 };
+        } else { set_play(false) };
 
     }
 
@@ -70,22 +76,12 @@ const InsertionSort = () => {
         return ref;
     }
 
-    // play function to iterate over frames with 500ms delay
     function handle_play() {
+        if (frame_index.current === frames.length - 1) {
+            frame_index.current = 0;
+        }
         set_play(!play)
     }
-
-
-    useEffect(() => {
-        if (play) {
-            timer.current = setInterval(() => step_forw(), 500)
-        }
-        return () => {
-            clearInterval(timer.current)
-        }
-
-    }, [play]);
-
 
     return (
         <>
@@ -97,7 +93,6 @@ const InsertionSort = () => {
                             type="number"
                             value={array_length}
                             min="0"
-                            defaultValue={5}
                             onChange={(e) => (set_array_length(+e.target.value))}
                         />
                     </label>
@@ -108,15 +103,18 @@ const InsertionSort = () => {
                     />
                 </form>
             </header>
-            <div className="h-10 w-10 rounded-full" >
-
+            <div style={{ display: show_stepper ? "block" : "none" }}>
+                <Stepper
+                    prev={step_back}
+                    play={handle_play}
+                    next={step_forw}
+                    state_play={play}
+                />
+            </div>
+            <div className="array-bar">
                 <ArrayBar array={items} current={get_current()} reference={get_reference()} />
             </div>
-            <div style={{ display: show_stepper_buttons ? "block" : "none" }}>
-                <button onClick={step_back}>{"<"}</button>
-                <button onClick={handle_play}>{!play ? "Play" : "Pause"}</button>
-                <button onClick={step_forw}>{">"}</button>
-            </div>
+
         </>
     )
 };

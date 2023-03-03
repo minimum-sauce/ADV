@@ -3,6 +3,7 @@
 type Focus = number | undefined;
 export type States = Array<State>;
 
+
 // A record type to save significant values when executing insertion_sort
 export type State = {
     value: number[],

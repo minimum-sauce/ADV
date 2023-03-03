@@ -18,12 +18,6 @@ function save_state(history: States, bottom: number[], top: number[], colour?: n
   });
 }
 
-export function get_id(history: States, history_idx: number, idx: number) {
-  if(idx === history[history_idx].colour){
-      return 'current';
-  } else {}
-}
-
 
 export function merge_sort(arr: Array<number>, history: States): void {
   save_state(history, [], [...arr]);

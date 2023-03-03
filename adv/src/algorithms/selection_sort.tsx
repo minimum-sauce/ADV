@@ -17,15 +17,6 @@ function add_state(history: States, arr: Array<number>, current?: number, ref?: 
     });
 }
 
-export function get_id(history: States, history_idx: number, idx: number){
-    if(idx === history[history_idx].current){
-        return 'current';
-    }else if(idx === history[history_idx].ref){
-        return 'ref'
-    }
-}
-
-
 function find_smallest<T>(arr: Array<T>, min: number, max: number): number {
     let smallest: number = min;
     for(let i: number = min + 1; i <= max; i ++){

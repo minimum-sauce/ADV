@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { merge_sort, get_id } from '../algorithms/merge_sort'
+import { merge_sort } from '../algorithms/merge_sort'
 import { random_permutation } from '../algorithms/random_permutation';
 
 type States = Array<State>;
@@ -7,6 +7,13 @@ type State = {
   bottom_arr: Array<number>,
   top_arr: Array<number>,
   colour?: number 
+}
+
+
+function get_id(history: States, history_idx: number, idx: number) {
+  if(idx === history[history_idx].colour){
+      return 'current';
+  } else {}
 }
 
 

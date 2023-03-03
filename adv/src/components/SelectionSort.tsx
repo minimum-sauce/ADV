@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { random_permutation } from "../algorithms/random_permutation";
-import { selection_sort, get_id } from '../algorithms/selection_sort'
+import { selection_sort } from '../algorithms/selection_sort'
 
 type States= Array<State>;
 type State = {
@@ -8,6 +8,15 @@ type State = {
     current?: number,
     ref?: number
 };
+
+function get_id(history: States, history_idx: number, idx: number){
+    if(idx === history[history_idx].current){
+        return 'current';
+    }else if(idx === history[history_idx].ref){
+        return 'ref'
+    }
+}
+
 
 let history: States = [];
 

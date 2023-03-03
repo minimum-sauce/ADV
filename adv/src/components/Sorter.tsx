@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useRef} from "react";
-import { insertion_sort, get_frames, type States, State } from "../algorithms/insertion_sort";
+import { insertion_sort_steps, get_frames, type States, State } from "../algorithms/insertion_sort";
 import { random_permutation } from "../algorithms/random_permutation";
 import Array_bar from "./ArrayBar";
 
@@ -24,7 +24,7 @@ const Sorter: React.FC<Props> = (props) => {
         frame_index.current = 0;                                //Reset frame_index
         const random_array = random_permutation(array_length)   //Generate random_array
         set_items(random_array);                                //Set the state of items to the array
-        insertion_sort([...random_array]);                      //Run a copy of the array through the sorting algorithm    
+        insertion_sort_steps([...random_array]);                      //Run a copy of the array through the sorting algorithm    
         set_frames(get_frames());                               //Set the state of frames to the recorded frames
         event.preventDefault();                                 //Prevent interface reload
     }

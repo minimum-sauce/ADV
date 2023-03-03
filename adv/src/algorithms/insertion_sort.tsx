@@ -1,5 +1,4 @@
 
-
 type Focus = number | undefined;
 export type States = Array<State>;
 
@@ -17,8 +16,7 @@ export type State = {
     }
 */
 
-
-// Initiating variable to save steps
+// Initiating variable to save stepsd
 let steps: States = []
 
 /**

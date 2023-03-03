@@ -1,4 +1,6 @@
 # [2023-02-16]
+## Kick-off meeting [1h]
+
 ## Research[6h]
 * After deciding to use react to build our interface for our project I had to start with some reasearch about the basics of the library
 * Completed a code along tutorial making a tic-tac-toe
@@ -60,8 +62,11 @@ and not really in line with what we've used in this course.
     to make it easier to follow and understad how the algorithm is working.
 *   Finished a working prototype for the insertion sort with a visual representation of every step
 
+# [2023-02-23]
+## Project meeting[1h]
+
 # [2023-02-27]
-## Code structuring[h]
+## Code structuring[7h]
 *   Been working on abstracting and structuring our code. 
     Separating diffrent functional components and documenting them to be able to reuse them throughout the code for an easier application, and not having to rewrite the same code. Also separating Functional components(showing something visual) from functions that don't need any visual representation
 
@@ -70,3 +75,24 @@ and not really in line with what we've used in this course.
 *   It has been a bit challanging knowing what information has to be passed to the next abstraction layer and not. Especially since we've all
     been working on separate protoypes for different sorting algorithms. 
 *   I think time and more structure will make it clearer as we try to merge our work.
+ 
+
+# [2023-02-28]
+## Debugging[2h]
+*   Found a bug in the stepping function causing the stepper to generate a new array instead of stepping in the one currently being displayed.
+    After some troubleshooting i found that when initialy loading the array the state varieble wasn't updated until the second rendering of the
+    Array component. 
+## Fix
+*   Instead of fist setting the state of the array and then call the stepper
+*   Pass a copy of the array to both the stepper and state variable
+## Code cleaning[4h]
+*   Cleaning up code and documenting  
+
+
+
+# [2023-03-01]
+## Project meeting[1h]
+## Report writing [6h]
+
+# [2023-03-02]
+## Report writing[5h]

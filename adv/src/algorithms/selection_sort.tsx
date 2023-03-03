@@ -67,6 +67,10 @@ const Selection_main: React.FC = () => {
     const [Current, setCurrent] = useState(0);
     console.log(Current);
     const scrambleClick = () => {
+        selection_sort(random_permutation(10));
+        setCurrent(0);
+    }
+    const unsortClick = () => {
         setCurrent(0);
     }
     const sortClick = () => {
@@ -86,6 +90,7 @@ const Selection_main: React.FC = () => {
         <div>
           <div className='buttons'>
                 <button onClick={scrambleClick}>{'Scramble'}</button>
+                <button onClick={unsortClick}>{'Unsort'}</button>
                 <button onClick={sortClick}>{'Sort'}</button> 
                 <button onClick={backClick}>{'<'}</button>
                 <button onClick={nextClick}>{'>'}</button>

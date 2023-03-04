@@ -72,7 +72,7 @@ export function insertion_sort_steps(list: number[]): void {
             ref = undefined;
             save();
 
-            insertion_iterator:
+
             for (let j = i - 1; j >= 0; j--) {
                 ref = j;
                 save();
@@ -91,7 +91,7 @@ export function insertion_sort_steps(list: number[]): void {
                     current = current - 1;
                     save();
 
-                    continue insertion_iterator;
+                    continue;
                 }
             }
         }

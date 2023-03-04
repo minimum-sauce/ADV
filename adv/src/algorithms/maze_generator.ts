@@ -71,9 +71,9 @@ function init_grid_maze(width: number, height: number): Maze {
 * */
 function maze_remove_wall(maze: Maze, node: number, neighbour: number) {
     maze.walls[node] = maze.walls[node]
-        .filter((item) => item != neighbour);
+        .filter((item) => item !== neighbour);
     maze.walls[neighbour] = maze.walls[neighbour]
-        .filter((item) => item != node);
+        .filter((item) => item !== node);
 }
 
 

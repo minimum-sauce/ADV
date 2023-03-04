@@ -1,7 +1,3 @@
-import React, { useState } from 'react';
-import { random_permutation } from './random_permutation';
-
-
 type States = Array<State>;
 type State = {
   bottom_arr: number[],

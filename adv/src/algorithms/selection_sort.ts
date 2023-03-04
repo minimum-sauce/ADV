@@ -1,6 +1,3 @@
-import React, { useState } from "react";
-import { random_permutation } from "./random_permutation";
-
 type States = Array<State>;
 type State = {
     arr: Array<number>,
@@ -17,7 +14,7 @@ function add_state(history: States, arr: Array<number>, current?: number, ref?: 
     });
 }
 
-function find_smallest<T>(history: States, arr: Array<number>, min: number, max: number): number {
+function find_smallest(history: States, arr: Array<number>, min: number, max: number): number {
     let smallest: number = min;
     for (let i: number = min + 1; i <= max; i++) {
         add_state(history, [...arr], smallest, i)

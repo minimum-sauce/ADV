@@ -18,9 +18,24 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "rootDir": "./src",
+    "typeRoots": [
+      "./node_modules/@types/",
+      "./src"
+    ],
+    "types": [
+      "jest",
+      "node",
+      "@types/jest"
+    ]
   },
   "include": [
     "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "__tests__"
   ]
 }

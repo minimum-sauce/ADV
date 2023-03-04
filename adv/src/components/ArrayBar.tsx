@@ -1,5 +1,5 @@
 import React from "react";
-import Container from "./ArrayContainer";
+import Container from "./Container";
 
 // Properties for the array bar component
 interface Props {
@@ -30,7 +30,7 @@ const ArrayBar: React.FC<Props> = ({ array, current, reference }) => {
     }
 
     return (
-        <div className="array-bar">
+        <div data-testid="array-bar" className="array-bar">
             {array.map((value, idx) => (
                 <Container value={value} idx={idx} focus={get_id(idx)} key={idx} />
             ))}

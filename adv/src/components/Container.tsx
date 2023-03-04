@@ -1,10 +1,11 @@
 import React from "react";
+import '../style/array_style.css'
 
 //Properties for the Container componenet
-interface Props {
+export interface Props {
     value: number,
-    idx: number,
-    focus: string
+    idx?: number,
+    focus?: string
 }
 
 /**
@@ -18,7 +19,7 @@ interface Props {
 const Container: React.FC<Props> = ({ value, idx, focus }) => {
 
     return (
-        <div className="array-container" key={idx} id={focus}>
+        <div data-testid="container" className="array-container" key={idx} id={focus}>
             {value}
         </div>
     )

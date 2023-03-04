@@ -3,7 +3,7 @@ export interface ListGraph {
     size: number;
 }
 
-type EdgeList = Array<[number, number]>
+//type EdgeList = Array<[number, number]>
 
 
 /* 

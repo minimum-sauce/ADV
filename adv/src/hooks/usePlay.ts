@@ -1,6 +1,14 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSpeedProvider } from "../providers/SpeedProvider";
 
+
+/**
+ * A hook to toggle play/pause with the 
+ * stepping speed of SpeedProvider
+ * @param step: takes a function to get to next step
+ * @param multiplier: multiplier to customise stepping speed
+ * @returns A custom hook
+ */
 const usePlay = (step: () => void, multiplier = 1) => {
     const timer = useRef<NodeJS.Timer>();
     const { sort_speed } = useSpeedProvider();

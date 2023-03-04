@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { merge_sort } from '../algorithms/merge_sort'
 import { random_permutation } from '../algorithms/random_permutation';
 import usePlay from '../hooks/usePlay';

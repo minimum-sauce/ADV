@@ -16,13 +16,13 @@ interface Props {
  * reference: index of the element to be passed id="reference"
  * @returns A React functional component of Containers given a value and a id
  */
-const ArrayBar: React.FC<Props> = (props) => {
+const ArrayBar: React.FC<Props> = ({ array, current, reference }) => {
 
     //Sets the id for each Container component
     function get_id(idx: number): string {
-        if (idx === props.current) {
+        if (idx === current) {
             return "current"
-        } else if (idx === props.reference) {
+        } else if (idx === reference) {
             return "ref"
         } else {
             return "normal"
@@ -31,7 +31,7 @@ const ArrayBar: React.FC<Props> = (props) => {
 
     return (
         <div className="array-bar">
-            {props.array.map((value, idx) => (
+            {array.map((value, idx) => (
                 <Container value={value} idx={idx} focus={get_id(idx)} key={idx} />
             ))}
         </div>

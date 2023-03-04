@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { useState } from 'react';
 import { generate_maze, State, Maze } from '../algorithms/maze_generator';
 import usePlay from '../hooks/usePlay';

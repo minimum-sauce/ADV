@@ -1,15 +1,15 @@
-import React, { useState, createContext, useContext } from 'react';
+import React, { useState } from 'react';
 import { SpeedProvider } from './providers/SpeedProvider'
 import { IterableMaze } from './components/Maze';
 import MergeMain from './components/MergeSort';
 import SelectionMain from './components/SelectionSort';
-import InsertionSort from './components/Sorter';
+import InsertionSort from './components/InsertionSort';
 import SortSpeed from './components/SortSpeed';
 
 import './style/App.css';
 import './style/array_style.css';
 import './style/Maze.css';
-//import '../style/MergeSort.css'
+import './style/MergeSort.css'
 
 type SortTypes = "insertion_sort" | "selection_sort" | "merge_sort" | "dfs_maze"
 

@@ -1,7 +1,7 @@
 import React from "react";
 
 //Properties for the Container componenet
-type Props = {
+interface Props {
     value: number,
     idx: number,
     focus: string
@@ -15,11 +15,11 @@ type Props = {
  * id: individual id for css styling
  * @returns A React functional component displaying value and css-style of given id 
  */
-const Container: React.FC<Props> = (props) => {
+const Container: React.FC<Props> = ({ value, idx, focus }) => {
 
     return (
-        <div className="array-container" key={props.idx} id={props.focus}>
-            {props.value}
+        <div className="array-container" key={idx} id={focus}>
+            {value}
         </div>
     )
 };

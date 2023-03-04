@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 
-// type of properties
+// interface for the properties of the Stepper component
 interface Props {
     next: () => void
     prev: () => void
@@ -8,8 +8,8 @@ interface Props {
     state_play?: boolean
 }
 /**
- * A Stepper compoenent with buttons to step and play
- * @param props functions for next_step, prev_step and play
+ * A Stepper compoenent with step and ply/pause buttons 
+ * @param props takes functions for next_step, prev_step, play11 and boolen of state_play
  * @returns A React functional component
  */
 const Stepper: React.FC<Props> = ({ next, prev, play, state_play }) => {

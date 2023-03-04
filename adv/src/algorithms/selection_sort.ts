@@ -17,9 +17,10 @@ function add_state(history: States, arr: Array<number>, current?: number, ref?: 
     });
 }
 
-function find_smallest<T>(arr: Array<T>, min: number, max: number): number {
+function find_smallest<T>(history: States, arr: Array<number>, min: number, max: number): number {
     let smallest: number = min;
     for (let i: number = min + 1; i <= max; i++) {
+        add_state(history, [...arr], smallest, i)
         if (arr[i] < arr[smallest]) {
             smallest = i;
         } else { }
@@ -38,11 +39,12 @@ export function selection_sort(history: States, arr: Array<number>): void {
     add_state(history, [...arr]);
     for (let i: number = 0; i < len; i++) {
         add_state(history, [...arr], i);
-        let smallest = find_smallest(arr, i, len - 1);
-        add_state(history, [...arr], i, smallest);
-        swap(arr, i, smallest);
+        let smallest = find_smallest(history, arr, i, len - 1);
         add_state(history, [...arr], smallest, i);
-        add_state(history, [...arr]);
+        swap(arr, i, smallest);
+        add_state(history, [...arr], i, smallest);
+
     };
+    add_state(history, [...arr]);
 }
 

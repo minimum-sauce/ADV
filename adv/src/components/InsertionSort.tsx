@@ -1,10 +1,8 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { insertion_sort_steps, get_frames, type States, State } from "../algorithms/insertion_sort";
 import { random_permutation } from "../algorithms/random_permutation";
 import ArrayBar from "./ArrayBar";
 import Stepper from "./Stepper"
-import { Props } from "../datastructures/types"
-import { useSpeedProvider } from "../providers/SpeedProvider";
 import usePlay from "../hooks/usePlay";
 
 
@@ -20,7 +18,6 @@ const InsertionSort: React.FC = () => {
     const init_state: State = { value: [], current: undefined, reference: undefined };
     const frame_index = useRef(0);
 
-
     // state variable to show stepper buttons and a function to update it
     const [show_stepper, set_show_stepper] = useState<boolean>(false)
     // state variable of the array passed to <Array /> and a function to update it
@@ -29,7 +26,7 @@ const InsertionSort: React.FC = () => {
     const [array_length, set_array_length] = useState<number>(5);
     // state variable of the the frames to step through and a function to update it
     const [frames, set_frames] = useState<States>([init_state]);
-    // state variale to track state of play button and a function to update it 
+    // a hook to acces play state and a function to update it
     const { play, set_play } = usePlay(step_forw);
 
 
@@ -40,8 +37,8 @@ const InsertionSort: React.FC = () => {
         const random_array = random_permutation(array_length)   //Generate random_array
         set_items(random_array);                                //Set the state of items to the array
         insertion_sort_steps([...random_array]);                //Run a copy of the array through the sorting algorithm    
-        set_frames(get_frames());
-        set_play(false);                               //Set the state of frames to the recorded frames
+        set_frames(get_frames());                               //Set the state of frames to the recorded frames
+        set_play(false);
         event.preventDefault();                                 //Prevent interface reload
     }
 
@@ -77,6 +74,7 @@ const InsertionSort: React.FC = () => {
         return ref;
     }
 
+    // trigger play hook and set state
     function handle_play() {
         if (frame_index.current === frames.length - 1) {
             frame_index.current = 0;

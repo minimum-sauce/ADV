@@ -29,7 +29,6 @@ const MergeMain: React.FC = () => {
   const [items, set_items] = useState<State>(history[history_idx.current]);
 
 
-
   const scramble_click = () => {
     history = [];
     random_array = random_permutation(6);

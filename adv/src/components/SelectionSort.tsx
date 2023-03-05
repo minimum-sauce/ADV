@@ -18,20 +18,20 @@ const SelectionMain: React.FC = () => {
     const frame_idx = useRef(0);
     const [items, set_items] = useState<Array<number>>([]);
     const [frames, set_frames] = useState<States>([init_state]);
-    
+
     // state variable to show stepper buttons and a function to update it
     const [show_stepper, set_show_stepper] = useState<boolean>(false)
     // state variable of the length of the array to be generated and a function to update it
     const [array_length, set_array_length] = useState<number>(5);
-    
+
 
     // event handeler for input from the html <form /> 
     function handle_submit(event: React.FormEvent<HTMLFormElement>): void {
         set_show_stepper(true)                                  //Show stepper buttons
-        frame_idx.current = 0;                                //Reset frame_index
+        frame_idx.current = 0;                                  //Reset frame_index
         const random_array = random_permutation(array_length)   //Generate random_array
         set_items(random_array);
-        selection_sort([...random_array]);             //Run a copy of the array through the sorting algorithm    
+        selection_sort([...random_array]);                      //Run a copy of the array through the sorting algorithm    
         set_frames(get_frames());
         set_play(false);
         event.preventDefault();                                 //Prevent interface reload
@@ -77,10 +77,10 @@ const SelectionMain: React.FC = () => {
     const { play, set_play } = usePlay(next_click);
 
     function handle_play() {
-      if (frame_idx.current === frames.length - 1) {
-        frame_idx.current = 0;
-      }
-      set_play(!play);
+        if (frame_idx.current === frames.length - 1) {
+            frame_idx.current = 0;
+        }
+        set_play(!play);
     }
 
     return (
@@ -103,11 +103,10 @@ const SelectionMain: React.FC = () => {
                 </form>
             </header>
             <div className='buttons'>
-                    <button onClick={unsort_click}>{'Unsort'}</button>
-                    <button onClick={sort_click}>{'Sort'}</button>
+                <button onClick={unsort_click}>{'Unsort'}</button>
+                <button onClick={sort_click}>{'Sort'}</button>
             </div>
             <div style={{ display: show_stepper ? "block" : "none" }}>
-                
                 <Stepper prev={back_click} play={handle_play} next={next_click} state_play={play} />
             </div>
             <div className="array-bar">

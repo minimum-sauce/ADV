@@ -35,30 +35,30 @@ const MergeMain: React.FC = () => {
     random_array = random_permutation(6);
     merge_sort(random_array, history);
     history_idx.current = 0;
-    set_items(history[history_idx.current])
+    set_items(history[history_idx.current]);
   }
 
   const unsort_click = () => {
     history_idx.current = 0;
-    set_items(history[history_idx.current])
+    set_items(history[history_idx.current]);
   }
 
   const sort_click = () => {
     history_idx.current = history.length - 1;
-    set_items(history[history_idx.current])
+    set_items(history[history_idx.current]);
   }
 
   const next_click = () => {
     if (history_idx.current < history.length - 1) {
       history_idx.current++;
-      set_items(history[history_idx.current])
+      set_items(history[history_idx.current]);
     } else { set_play(false) }
   }
 
   const back_click = () => {
     if (history_idx.current > 0) {
       history_idx.current--;
-      set_items(history[history_idx.current])
+      set_items(history[history_idx.current]);
     } else { }
   }
 
@@ -68,7 +68,7 @@ const MergeMain: React.FC = () => {
     if (history_idx.current === history.length - 1) {
       history_idx.current = 0;
     }
-    set_play(!play)
+    set_play(!play);
   }
 
 
@@ -82,10 +82,8 @@ const MergeMain: React.FC = () => {
       <Stepper prev={back_click} play={handle_play} next={next_click} state_play={play} />
       <div>Original array</div>
       <ArrayBar array={items.top_arr} current={items.colour} />
-      <ArrayBar array={items.bottom_arr} reference={items.colour} />
+      <ArrayBar array={items.bottom_arr} />
     </div>
-
-
   )
 };
 

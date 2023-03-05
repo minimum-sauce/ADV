@@ -5,8 +5,13 @@ type State = {
     ref?: number
 };
 
+let history: States = [];
 
-function add_state(history: States, arr: Array<number>, current?: number, ref?: number): void {
+export const get_frames = () => {
+    return history;
+}
+
+function add_state(arr: Array<number>, current?: number, ref?: number): void {
     history.push({
         arr: arr,
         current: current,
@@ -14,10 +19,10 @@ function add_state(history: States, arr: Array<number>, current?: number, ref?: 
     });
 }
 
-function find_smallest(history: States, arr: Array<number>, min: number, max: number): number {
+function find_smallest(arr: Array<number>, min: number, max: number): number {
     let smallest: number = min;
     for (let i: number = min + 1; i <= max; i++) {
-        add_state(history, [...arr], smallest, i)
+        add_state([...arr], smallest, i)
         if (arr[i] < arr[smallest]) {
             smallest = i;
         } else { }
@@ -31,17 +36,18 @@ function swap<T>(arr: Array<T>, x: number, y: number): void {
     arr[y] = temp;
 }
 
-export function selection_sort(history: States, arr: Array<number>): void {
+export function selection_sort(arr: Array<number>): void {
+    history = [];
     const len: number = arr.length;
-    add_state(history, [...arr]);
+    add_state([...arr]);
     for (let i: number = 0; i < len; i++) {
-        add_state(history, [...arr], i);
-        let smallest = find_smallest(history, arr, i, len - 1);
-        add_state(history, [...arr], smallest, i);
+        add_state([...arr], i);
+        let smallest = find_smallest(arr, i, len - 1);
+        add_state([...arr], smallest, i);
         swap(arr, i, smallest);
-        add_state(history, [...arr], i, smallest);
+        add_state([...arr], i, smallest);
 
     };
-    add_state(history, [...arr]);
+    add_state([...arr]);
 }
 

@@ -64,3 +64,18 @@ Created initial implementation for incremental sort using hooks and state with r
   Currently, when pressing the play button, there is no way to stop it. On top of that each time you press the button, it stacks upon the earlier press and the running of the algorithm becomes faster. There is also the issue
   where once you have pressed the play button has been pressed, whenever you change the size of the maze, it reverts to the size of the maze from before the play button was pressed. I know the cause of multiple of these issues,
   but have yet to find a solution to them.
+
+# [2023-03-02]
+## Report  
+* Started writing on the documentation on how to run the program as well as how the maze-generation works.
+
+# [2023-03-03]
+## Report 
+* continued writing on the documentation. Documented all the functions for all function related to the Maze generation. Wrote the different data
+  structures used as well as how the visual implementation was implemented for the maze generation.
+  
+# [2023-03-04]
+## Implementations
+* Smaller implementation of random startpoint for the maze generation. Changed the random_permutation function used by the maze generation to be named 
+  permutate_neighbours and use the general "random_permutation" function implemented by Jesper.
+* Started writing tests for the maze generation related functions 

@@ -5,6 +5,7 @@ import MergeMain from './components/MergeSort';
 import SelectionMain from './components/SelectionSort';
 import InsertionSort from './components/InsertionSort';
 import SortSpeed from './components/SortSpeed';
+import QuickSort from './components/QucikSort';
 
 import './style/App.css';
 import './style/array_style.css';

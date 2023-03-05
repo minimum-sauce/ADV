@@ -72,8 +72,8 @@ and not really in line with what we've used in this course.
 
 
 ## Problems
-*   It has been a bit challanging knowing what information has to be passed to the next abstraction layer and not. Especially since we've all
-    been working on separate protoypes for different sorting algorithms. 
+*   It has been a bit challanging knowing what information has to be passed to the next abstraction layer and not.          
+    Especially since we've all been working on separate protoypes for different sorting algorithms. 
 *   I think time and more structure will make it clearer as we try to merge our work.
  
 
@@ -96,3 +96,33 @@ and not really in line with what we've used in this course.
 
 # [2023-03-02]
 ## Report writing[5h]
+
+# [2023-03-03]
+## Report writing[4h]
+
+## Debugging[2h]
+*   We had some issues due to poor implementation of the play button solutions are implemented bellow.
+    Problems:
+    * Multiple toggles would initaite multiple stepping processes
+    * No pause functionallity
+    * No state handling
+    * No way to set sort_speed
+
+
+
+## Implementation[5h]
+*   Custom Context provider to enable state read/set of sort_speed throughout the applictaion
+*   SortSpeed component to return a slider for setting sort_speed 
+*   Stepper component to return buttons for play/pause and step 
+*   Custom hook for the <Stepper /> component, "usePlay" to toggle play/pause and apply sort_speed. 
+    Using the Context mentioned above. Changes in sort_speed will apply directly.
+
+# [2023-03-04]
+## Formatting[2h]
+*   Eslint error cleanup
+*   Further code documenatation and cleanup
+
+## Writing tests[2h]
+*   Added unit tests for Container component and ArrayBar component. Turned out to be quite challenging     
+    due to the React library types and methods. I think i got the hang of it in the end. 
+

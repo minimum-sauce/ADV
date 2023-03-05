@@ -115,6 +115,7 @@ export const IterableMaze: React.FC = () => {
             setMaze(maze_frames[index.current]);
         } else {
             index.current = maze_frames.length - 1;
+            set_play(false);
         }
     }
 

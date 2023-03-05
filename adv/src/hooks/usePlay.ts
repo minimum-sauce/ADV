@@ -11,6 +11,7 @@ import { useSpeedProvider } from "../providers/SpeedProvider";
  */
 const usePlay = (step: () => void, multiplier = 1) => {
     const timer = useRef<NodeJS.Timer>();
+    // get context of SpeedProvider
     const { sort_speed } = useSpeedProvider();
 
     // state variale to track state of play button and a function to update it 

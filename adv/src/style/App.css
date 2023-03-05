@@ -11,7 +11,7 @@
 }
 
 .header {
-  background-color: bisque;
+  background-color: #CBD18F;
   padding: 1%;
   justify-content: center;
   text-align: center;
@@ -82,5 +82,5 @@
   padding: 4px 8px 4px 8px;
   font-size: 24px;
   border: 2px;
-  border-style: ridge;
+  border-style: double;
 }

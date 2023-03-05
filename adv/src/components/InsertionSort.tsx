@@ -48,7 +48,7 @@ const InsertionSort: React.FC = () => {
             frame_index.current--;
             const new_frame = frames[frame_index.current].value;
             set_items(new_frame);
-        } else { frame_index.current = 1; };
+        } else { };
 
     }
 

@@ -18,7 +18,7 @@ const usePlay = (step: () => void, multiplier = 1) => {
     const [play, set_play] = useState<boolean>(false);
 
     useEffect(() => {
-        if (timer.current) {
+        if (play) {
             clearInterval(timer.current)
             timer.current = setInterval(() => step(), multiplier * sort_speed)
         }

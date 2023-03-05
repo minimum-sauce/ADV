@@ -14,6 +14,7 @@ const SortSpeed: React.FC<React.InputHTMLAttributes<HTMLInputElement>> = (props)
     return (
         <div className="speed-provider">This is SPEEDPROVIDER
             <input
+                data-testid="slider"
                 className="slider"
                 type="range"
                 {...props}

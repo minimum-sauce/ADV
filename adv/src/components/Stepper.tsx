@@ -15,10 +15,10 @@ interface Props {
 const Stepper: React.FC<Props> = ({ next, prev, play, state_play }) => {
 
     return (
-        <div className="stepper">
-            <button onClick={prev}>{"<"}</button>
-            <button onClick={play}>{!state_play ? "Play" : "Pause"}</button>
-            <button onClick={next}>{">"}</button>
+        <div data-tesid="stepper" className="stepper">
+            <button data-testid="prev-btn" onClick={prev}>{"<"}</button>
+            <button data-testid="play-btn" onClick={play}>{!state_play ? "Play" : "Pause"}</button>
+            <button data-testid="next-btn" onClick={next}>{">"}</button>
         </div>
     )
 }

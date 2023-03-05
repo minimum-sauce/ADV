@@ -8,8 +8,8 @@ interface Props {
     state_play?: boolean
 }
 /**
- * A Stepper compoenent with step and ply/pause buttons 
- * @param props takes functions for next_step, prev_step, play11 and boolen of state_play
+ * A Stepper compoenent with step and play/pause buttons 
+ * @param props takes functions for next_step, prev_step, play and boolen of state_play
  * @returns A React functional component
  */
 const Stepper: React.FC<Props> = ({ next, prev, play, state_play }) => {

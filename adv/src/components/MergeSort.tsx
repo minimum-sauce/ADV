@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { merge_sort } from '../algorithms/merge_sort'
 import { random_permutation } from '../algorithms/random_permutation';
 import usePlay from '../hooks/usePlay';
+import ArrayBar from './ArrayBar';
 import Stepper from './Stepper'
 
 type States = Array<State>;
@@ -80,21 +81,10 @@ const MergeMain: React.FC = () => {
       </div>
       <Stepper prev={back_click} play={handle_play} next={next_click} state_play={play} />
       <div>Original array</div>
-      <div className='array-bar'>
-        {items.top_arr.map((val, index) => (
-          <div className='array-container' key={index} id={get_id(history, history_idx.current, index)}>
-            {val}
-          </div>
-        ))}
-      </div>
-      <div className='array-bar'>
-        {items.bottom_arr.map((val1, idx1) => (
-          <div className='array-container' key={idx1}>
-            {val1}
-          </div>
-        ))}
-      </div>
+      <ArrayBar array={items.top_arr} current={items.colour} />
+      <ArrayBar array={items.bottom_arr} reference={items.colour} />
     </div>
+
 
   )
 };

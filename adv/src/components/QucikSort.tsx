@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { insertion_sort_steps, get_frames, type States, State } from "../algorithms/insertion_sort";
+import { quick_sort_steps, get_frames, type States, State } from '../algorithms/quick_sort'
 import { random_permutation } from "../algorithms/random_permutation";
 import ArrayBar from "./ArrayBar";
 import Stepper from "./Stepper"
@@ -13,11 +13,18 @@ import usePlay from "../hooks/usePlay";
  * step through the steps of evaluation generated form passing the array to 
  * the insertion_sort algorithm
  */
-const InsertionSort: React.FC = () => {
+const QuickSort: React.FC = () => {
 
-    const init_state: State = { value: [], current: undefined, reference: undefined };
+    const init_state: State = {
+        arr: [],
+        left_arr: [],
+        right_arr: [],
+        pivot: [],
+        depth: 0,
+        current: undefined,
+        reference: undefined
+    };
     const frame_index = useRef(0);
-
     // state variable to show stepper buttons and a function to update it
     const [show_stepper, set_show_stepper] = useState<boolean>(false)
     // state variable of the array passed to <Array /> and a function to update it
@@ -29,6 +36,10 @@ const InsertionSort: React.FC = () => {
     // a hook to acces play state and a function to update it
     const { play, set_play } = usePlay(step_forw);
 
+    const [left, set_left] = useState<number[]>([]);
+    const [right, set_right] = useState<number[]>([]);
+    const [pivot, set_pivot] = useState<number[]>([]);
+
 
     // event handeler for input from the html <form /> 
     function handle_submit(event: React.FormEvent<HTMLFormElement>): void {
@@ -36,7 +47,7 @@ const InsertionSort: React.FC = () => {
         frame_index.current = 0;                                //Reset frame_index
         const random_array = random_permutation(array_length)   //Generate random_array
         set_items(random_array);                                //Set the state of items to the array
-        insertion_sort_steps([...random_array]);                //Run a copy of the array through the sorting algorithm    
+        quick_sort_steps([...random_array]);                    //Run a copy of the array through the sorting algorithm    
         set_frames(get_frames());                               //Set the state of frames to the recorded frames
         set_play(false);                                        //initial value of play state
         event.preventDefault();                                 //Prevent interface reload
@@ -46,8 +57,13 @@ const InsertionSort: React.FC = () => {
     function step_back() {
         if (frame_index.current > 1) {
             frame_index.current--;
-            const new_frame = frames[frame_index.current].value;
-            set_items(new_frame);
+            const new_frame = frames[frame_index.current];
+            set_items(new_frame.arr);
+            set_left(new_frame.left_arr);
+            set_right(new_frame.right_arr);
+            if (new_frame.pivot) {
+                set_pivot(new_frame.pivot);
+            }
         } else { frame_index.current = 1; };
 
     }
@@ -56,8 +72,13 @@ const InsertionSort: React.FC = () => {
     function step_forw() {
         if (frame_index.current < frames.length - 1) {
             frame_index.current++;
-            const new_frame = frames[frame_index.current].value;
-            set_items(new_frame);
+            const new_frame = frames[frame_index.current];
+            set_items(new_frame.arr);
+            set_left(new_frame.left_arr);
+            set_right(new_frame.right_arr);
+            if (new_frame.pivot) {
+                set_pivot(new_frame.pivot);
+            }
         } else { set_play(false) };
 
     }
@@ -112,12 +133,15 @@ const InsertionSort: React.FC = () => {
             <div className="array-bar">
                 <ArrayBar array={items} current={get_current()} reference={get_reference()} />
             </div>
+            <div className="array-bar">
+                <ArrayBar array={left} /> <ArrayBar array={pivot} /><ArrayBar array={right} />
+            </div>
 
         </>
     )
 };
 
-export default InsertionSort
+export default QuickSort
 
 
 

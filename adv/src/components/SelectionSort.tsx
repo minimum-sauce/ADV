@@ -102,12 +102,11 @@ const SelectionMain: React.FC = () => {
                     />
                 </form>
             </header>
-            <div className='buttons'>
+            <div style={{ display: show_stepper ? "block" : "none" }}>
+                <div className='buttons'>
                     <button onClick={unsort_click}>{'Unsort'}</button>
                     <button onClick={sort_click}>{'Sort'}</button>
-            </div>
-            <div style={{ display: show_stepper ? "block" : "none" }}>
-                
+                </div>
                 <Stepper prev={back_click} play={handle_play} next={next_click} state_play={play} />
             </div>
             <div className="array-bar">

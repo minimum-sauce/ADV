@@ -16,7 +16,7 @@ export type State = {
     }
 */
 
-// Initiating variable to save stepsd
+// Initiating variable to save steps
 let steps: States = []
 
 /**

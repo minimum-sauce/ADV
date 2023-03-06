@@ -1,30 +1,21 @@
 import React, { useState, useRef } from 'react';
-import { merge_sort } from '../algorithms/merge_sort'
+import { merge_sort, States, State } from '../algorithms/merge_sort'
 import { random_permutation } from '../algorithms/random_permutation';
 import usePlay from '../hooks/usePlay';
 import ArrayBar from './ArrayBar';
 import Stepper from './Stepper'
 
-type States = Array<State>;
-type State = {
-  bottom_arr: Array<number>,
-  top_arr: Array<number>,
-  colour?: number
-}
-
-
-function get_id(history: States, history_idx: number, idx: number) {
-  if (idx === history[history_idx].colour) {
-    return 'current';
-  } else { }
-}
-
-
+// Array that is used to store States.
 var history: States = [];
-
+// Random array to be sorted.
 var random_array = random_permutation(6);
 merge_sort(random_array, history);
 
+/**
+ * Renders the array and buttons that allow the user to step through the stored States in order to
+ * visualize the different steps in the sorting algorithm.
+ * @returns - A JSX element that handles the rendering and produces input buttons.
+ */
 const MergeMain: React.FC = () => {
   const history_idx = useRef(0);
   const [items, set_items] = useState<State>(history[history_idx.current]);
